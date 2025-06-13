@@ -55,17 +55,21 @@ export default function HowItWorks() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="flex flex-col items-center text-center space-y-2">
             <div className="text-4xl font-bold text-primary">100%</div>
-            <p className="text-muted-foreground">Compatibilidade Garantida</p>
-          </div>
-          <div className="flex flex-col items-center text-center space-y-2">
-            <div className="text-4xl font-bold text-primary">10.000+</div>
             <p className="text-muted-foreground">
-              Componentes no Banco de Dados
+              Compatibilidade garantida. Se não funciona, a gente nem sugere.
             </p>
           </div>
           <div className="flex flex-col items-center text-center space-y-2">
-            <div className="text-4xl font-bold text-primary">50.000+</div>
-            <p className="text-muted-foreground">Usuários Satisfeitos</p>
+            <div className="text-4xl font-bold text-primary">1.000+</div>
+            <p className="text-muted-foreground">
+              Componentes catalogados — com novos entrando todo mês
+            </p>
+          </div>
+          <div className="flex flex-col items-center text-center space-y-2">
+            <div className="text-4xl font-bold text-primary">2 minutos</div>
+            <p className="text-muted-foreground">
+              É o tempo médio pra gerar sua build perfeita, sem complicação
+            </p>
           </div>
         </div>
       </div>
