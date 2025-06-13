@@ -30,6 +30,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import {
+  CpuPreference,
+  createBuild,
+  GpuPreference,
+  UsageType,
+} from '@/services/pcIdeal-api/modules/build';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   ArrowLeft,
@@ -50,21 +56,40 @@ import { useState } from 'react';
 export default function BuilderPage() {
   const [step, setStep] = useState(1);
   const [budget, setBudget] = useState(5000);
-  const [purpose, setPurpose] = useState('gaming');
-  const [cpuPreference, setCpuPreference] = useState('no-preference');
-  const [gpuPreference, setGpuPreference] = useState('no-preference');
+  const [usageType, setUsageType] = useState<UsageType>('GAMING');
+  const [cpuPreference, setCpuPreference] =
+    useState<CpuPreference>('no-preference');
+  const [gpuPreference, setGpuPreference] =
+    useState<GpuPreference>('no-preference');
   const [loading, setLoading] = useState(false);
   const [selectedBuild, setSelectedBuild] = useState(0);
   const [buildComplete, setBuildComplete] = useState(false);
 
-  const handleNextStep = () => {
+  const handleBuild = async () => {
+    setLoading(true);
+
+    const result = await createBuild({
+      budget,
+      cpuPreference,
+      gpuPreference,
+      usageType,
+    });
+
+    if (!result.success) {
+      console.error(result.error.response?.data || result.error.message);
+      setLoading(false);
+      return;
+    }
+
+    console.log(result.data);
+    setBuildComplete(true);
+    setLoading(false);
+  };
+
+  const handleNextStep = async () => {
     if (step === 2) {
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-        setBuildComplete(true);
-        setStep(3);
-      }, 2000);
+      setStep(3);
+      await handleBuild();
     } else {
       setStep(step + 1);
     }
@@ -313,18 +338,20 @@ export default function BuilderPage() {
                 <CardContent>
                   <div className="space-y-6">
                     <RadioGroup
-                      value={purpose}
-                      onValueChange={setPurpose}
+                      value={usageType}
+                      onValueChange={(value) =>
+                        setUsageType(value as UsageType)
+                      }
                       className="grid grid-cols-1 md:grid-cols-3 gap-4"
                     >
                       <div className="relative">
                         <RadioGroupItem
-                          value="gaming"
-                          id="gaming"
+                          value="GAMING"
+                          id="GAMING"
                           className="peer sr-only"
                         />
                         <Label
-                          htmlFor="gaming"
+                          htmlFor="GAMING"
                           className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-6 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                         >
                           <MonitorPlay className="mb-3 h-8 w-8 text-primary" />
@@ -339,12 +366,12 @@ export default function BuilderPage() {
                       </div>
                       <div className="relative">
                         <RadioGroupItem
-                          value="work"
-                          id="work"
+                          value="WORK"
+                          id="WORK"
                           className="peer sr-only"
                         />
                         <Label
-                          htmlFor="work"
+                          htmlFor="WORK"
                           className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-6 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                         >
                           <Cpu className="mb-3 h-8 w-8 text-primary" />
@@ -359,12 +386,12 @@ export default function BuilderPage() {
                       </div>
                       <div className="relative">
                         <RadioGroupItem
-                          value="creation"
-                          id="creation"
+                          value="CONTENT_CREATOR"
+                          id="CONTENT_CREATOR"
                           className="peer sr-only"
                         />
                         <Label
-                          htmlFor="creation"
+                          htmlFor="CONTENT_CREATOR"
                           className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-6 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                         >
                           <HardDrive className="mb-3 h-8 w-8 text-primary" />
@@ -390,7 +417,9 @@ export default function BuilderPage() {
                           </Label>
                           <Select
                             value={cpuPreference}
-                            onValueChange={setCpuPreference}
+                            onValueChange={(value) =>
+                              setCpuPreference(value as CpuPreference)
+                            }
                           >
                             <SelectTrigger id="cpu-preference">
                               <SelectValue placeholder="Selecione uma preferência" />
@@ -412,7 +441,9 @@ export default function BuilderPage() {
                           </Label>
                           <Select
                             value={gpuPreference}
-                            onValueChange={setGpuPreference}
+                            onValueChange={(value) =>
+                              setGpuPreference(value as GpuPreference)
+                            }
                           >
                             <SelectTrigger id="gpu-preference">
                               <SelectValue placeholder="Selecione uma preferência" />
@@ -624,9 +655,9 @@ export default function BuilderPage() {
                               </CardTitle>
                               <CardDescription>
                                 Configuração otimizada para{' '}
-                                {purpose === 'gaming'
+                                {usageType === 'GAMING'
                                   ? 'jogos'
-                                  : purpose === 'work'
+                                  : usageType === 'WORK'
                                     ? 'trabalho'
                                     : 'criação de conteúdo'}
                               </CardDescription>
@@ -638,13 +669,13 @@ export default function BuilderPage() {
                         </CardHeader>
                         <CardContent>
                           <Tabs defaultValue="components">
-                            <TabsList className="grid w-full grid-cols-3">
+                            <TabsList className="grid w-full grid-cols-2">
                               <TabsTrigger value="components">
                                 Componentes
                               </TabsTrigger>
-                              <TabsTrigger value="performance">
+                              {/* <TabsTrigger value="performance">
                                 Desempenho
-                              </TabsTrigger>
+                              </TabsTrigger> */}
                               <TabsTrigger value="prices">Preços</TabsTrigger>
                             </TabsList>
                             <TabsContent
@@ -667,7 +698,7 @@ export default function BuilderPage() {
                                 )}
                               </div>
                             </TabsContent>
-                            <TabsContent value="performance" className="pt-4">
+                            {/* <TabsContent value="performance" className="pt-4">
                               <div className="space-y-6">
                                 <div>
                                   <h3 className="font-medium mb-2">
@@ -754,7 +785,7 @@ export default function BuilderPage() {
                                   </div>
                                 </div>
                               </div>
-                            </TabsContent>
+                            </TabsContent> */}
                             <TabsContent value="prices" className="pt-4">
                               <div className="space-y-4">
                                 <div className="rounded-lg border p-4">
@@ -767,7 +798,7 @@ export default function BuilderPage() {
                                       price={builds[selectedBuild].price}
                                       bestPrice={true}
                                     />
-                                    <PriceItem
+                                    {/* <PriceItem
                                       store="Terabyte"
                                       price={builds[selectedBuild].price * 1.02}
                                     />
@@ -778,7 +809,7 @@ export default function BuilderPage() {
                                     <PriceItem
                                       store="Amazon"
                                       price={builds[selectedBuild].price * 1.05}
-                                    />
+                                    /> */}
                                   </div>
                                 </div>
                                 <div className="rounded-lg border p-4 bg-muted/20">
@@ -832,9 +863,9 @@ export default function BuilderPage() {
                                 Objetivo
                               </span>
                               <span className="font-medium">
-                                {purpose === 'gaming'
+                                {usageType === 'GAMING'
                                   ? 'Jogos'
-                                  : purpose === 'work'
+                                  : usageType === 'WORK'
                                     ? 'Trabalho'
                                     : 'Criação de Conteúdo'}
                               </span>
@@ -846,7 +877,7 @@ export default function BuilderPage() {
                               <span className="font-medium">
                                 {cpuPreference === 'no-preference'
                                   ? 'Sem Preferência'
-                                  : cpuPreference === 'amd'
+                                  : cpuPreference === 'AMD'
                                     ? 'AMD'
                                     : 'Intel'}
                               </span>
@@ -858,7 +889,7 @@ export default function BuilderPage() {
                               <span className="font-medium">
                                 {gpuPreference === 'no-preference'
                                   ? 'Sem Preferência'
-                                  : gpuPreference === 'nvidia'
+                                  : gpuPreference === 'NVIDIA'
                                     ? 'NVIDIA'
                                     : 'AMD'}
                               </span>
@@ -1002,34 +1033,34 @@ function ComponentItem({ icon, name, value, description, price, explanation }) {
   );
 }
 
-function PerformanceBar({ game, fps, app, score }) {
-  const value = fps || score;
-  const label = game || app;
-  const metric = fps ? 'FPS' : 'Pontos';
+// function PerformanceBar({ game, fps, app, score }) {
+//   const value = fps || score;
+//   const label = game || app;
+//   const metric = fps ? 'FPS' : 'Pontos';
 
-  let color = 'bg-red-500';
-  if (value > 60 && fps) color = 'bg-yellow-500';
-  if (value > 100 && fps) color = 'bg-green-500';
-  if (value > 80 && !fps) color = 'bg-green-500';
-  if (value > 60 && !fps) color = 'bg-yellow-500';
+//   let color = 'bg-red-500';
+//   if (value > 60 && fps) color = 'bg-yellow-500';
+//   if (value > 100 && fps) color = 'bg-green-500';
+//   if (value > 80 && !fps) color = 'bg-green-500';
+//   if (value > 60 && !fps) color = 'bg-yellow-500';
 
-  return (
-    <div className="space-y-1">
-      <div className="flex justify-between text-sm">
-        <span>{label}</span>
-        <span className="font-medium">
-          {value} {metric}
-        </span>
-      </div>
-      <div className="h-2 w-full rounded-full bg-muted">
-        <div
-          className={`h-2 rounded-full ${color}`}
-          style={{ width: `${fps ? Math.min(value / 4, 100) : value}%` }}
-        ></div>
-      </div>
-    </div>
-  );
-}
+//   return (
+//     <div className="space-y-1">
+//       <div className="flex justify-between text-sm">
+//         <span>{label}</span>
+//         <span className="font-medium">
+//           {value} {metric}
+//         </span>
+//       </div>
+//       <div className="h-2 w-full rounded-full bg-muted">
+//         <div
+//           className={`h-2 rounded-full ${color}`}
+//           style={{ width: `${fps ? Math.min(value / 4, 100) : value}%` }}
+//         ></div>
+//       </div>
+//     </div>
+//   );
+// }
 
 function PriceItem({ store, price, bestPrice = false }) {
   return (
