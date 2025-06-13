@@ -2,6 +2,7 @@
 
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
+import { localRoutePaths } from '@/constants/localRoutePaths';
 import { HardDrive, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -14,6 +15,7 @@ export default function Header() {
   const isActive = (path: string) => {
     return pathname === path;
   };
+  const { builder, howItWorks } = localRoutePaths;
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -33,23 +35,23 @@ export default function Header() {
               Início
             </Link>
             <Link
-              href="/montar"
+              href={builder}
               className={`text-sm font-medium transition-colors hover:text-primary ${
                 isActive('/montar') ? 'text-primary' : 'text-foreground/60'
               }`}
             >
               Montar PC
             </Link>
-            <Link
+            {/* <Link
               href="/componentes"
               className={`text-sm font-medium transition-colors hover:text-primary ${
                 isActive('/componentes') ? 'text-primary' : 'text-foreground/60'
               }`}
             >
               Componentes
-            </Link>
+            </Link> */}
             <Link
-              href="/como-funciona"
+              href={howItWorks}
               className={`text-sm font-medium transition-colors hover:text-primary ${
                 isActive('/como-funciona')
                   ? 'text-primary'
@@ -62,7 +64,7 @@ export default function Header() {
         </div>
         <div className="flex items-center gap-4">
           <ThemeToggle />
-          <div className="hidden md:flex items-center gap-4">
+          {/* <div className="hidden md:flex items-center gap-4">
             <Link href="/login">
               <Button variant="outline" size="sm">
                 Entrar
@@ -73,7 +75,7 @@ export default function Header() {
                 Cadastrar
               </Button>
             </Link>
-          </div>
+          </div> */}
           <button
             className="md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
