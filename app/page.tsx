@@ -1,8 +1,8 @@
 import BuilderPreview from '@/components/builder-preview';
 import FeatureCard from '@/components/feature-card';
 import HowItWorks from '@/components/how-it-works';
-import TestimonialCard from '@/components/testimonial-card';
 import { Button } from '@/components/ui/button';
+import { localRoutePaths } from '@/constants/localRoutePaths';
 import {
   ArrowRight,
   Check,
@@ -12,8 +12,10 @@ import {
   Share2,
   Zap,
 } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Home() {
+  const { howItWorks, builder } = localRoutePaths;
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -32,16 +34,20 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Button
-                  size="lg"
-                  className="group bg-primary hover:bg-primary/90"
-                >
-                  Montar Meu PC
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-                <Button size="lg" variant="outline">
-                  Como Funciona
-                </Button>
+                <Link href={builder}>
+                  <Button
+                    size="lg"
+                    className="group bg-primary hover:bg-primary/90"
+                  >
+                    Montar Meu PC
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </Link>
+                <Link href={howItWorks}>
+                  <Button size="lg" variant="outline">
+                    Como Funciona
+                  </Button>
+                </Link>
               </div>
             </div>
             <div className="flex items-center justify-center">
@@ -129,7 +135,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-muted/40">
+      {/* <section className="w-full py-12 md:py-24 lg:py-32 bg-muted/40">
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
@@ -162,7 +168,7 @@ export default function Home() {
             />
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-primary text-primary-foreground">
@@ -178,10 +184,12 @@ export default function Home() {
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
-              <Button size="lg" variant="secondary" className="group">
-                Montar Meu PC
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
+              <Link href={builder}>
+                <Button size="lg" variant="secondary" className="group">
+                  Montar Meu PC
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
