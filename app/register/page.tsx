@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   description: 'Crie sua conta PcIdeal',
 };
 
-export default function SignupPage() {
+export default function RegisterPage() {
   const { landingPage, terms } = localRoutePaths;
   return (
     <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-muted/30 p-4">
