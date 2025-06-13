@@ -36,6 +36,7 @@ import {
   ArrowRight,
   Check,
   Cpu,
+  Download,
   HardDrive,
   Info,
   MemoryStick,
@@ -48,10 +49,12 @@ import { useState } from 'react';
 
 export default function BuilderPage() {
   const [step, setStep] = useState(1);
-  const [budget, setBudget] = useState(1500);
+  const [budget, setBudget] = useState(5000);
   const [purpose, setPurpose] = useState('gaming');
-  const [preference, setPreference] = useState('no-preference');
+  const [cpuPreference, setCpuPreference] = useState('no-preference');
+  const [gpuPreference, setGpuPreference] = useState('no-preference');
   const [loading, setLoading] = useState(false);
+  const [selectedBuild, setSelectedBuild] = useState(0);
   const [buildComplete, setBuildComplete] = useState(false);
 
   const handleNextStep = () => {
@@ -71,6 +74,160 @@ export default function BuilderPage() {
     setStep(step - 1);
   };
 
+  const builds = [
+    {
+      name: 'Econômico',
+      price: 4750.95,
+      components: [
+        {
+          icon: <Cpu className="h-6 w-6" />,
+          name: 'Processador',
+          value: 'AMD Ryzen 5 5600X',
+          description: '6 núcleos, 12 threads, 3.7GHz (4.6GHz Turbo)',
+          price: 1099.99,
+          explanation:
+            'Excelente processador para jogos com ótimo custo-benefício.',
+        },
+        {
+          icon: <MonitorPlay className="h-6 w-6" />,
+          name: 'Placa de Vídeo',
+          value: 'NVIDIA RTX 3060',
+          description: '12GB GDDR6, Ray Tracing',
+          price: 1899.99,
+          explanation:
+            'Boa performance para jogos em 1080p com suporte a Ray Tracing e DLSS.',
+        },
+        {
+          icon: <MemoryStick className="h-6 w-6" />,
+          name: 'Memória',
+          value: '16GB DDR4 3200MHz',
+          description: '2x8GB, CL16',
+          price: 349.99,
+          explanation:
+            'Capacidade suficiente para jogos atuais com boa velocidade.',
+        },
+        {
+          icon: <HardDrive className="h-6 w-6" />,
+          name: 'Armazenamento',
+          value: 'SSD NVMe 1TB',
+          description: 'PCIe 3.0, 3500MB/s',
+          price: 499.99,
+          explanation:
+            'Armazenamento rápido com boa capacidade para jogos e aplicativos.',
+        },
+        {
+          icon: <Zap className="h-6 w-6" />,
+          name: 'Fonte',
+          value: '650W 80+ Bronze',
+          description: 'Semi-modular, certificada',
+          price: 399.99,
+          explanation:
+            'Potência adequada com certificação de eficiência e margem para upgrades.',
+        },
+      ],
+    },
+    {
+      name: 'Equilibrado',
+      price: 5000.95,
+      components: [
+        {
+          icon: <Cpu className="h-6 w-6" />,
+          name: 'Processador',
+          value: 'AMD Ryzen 7 5800X',
+          description: '8 núcleos, 16 threads, 3.8GHz (4.7GHz Turbo)',
+          price: 1499.99,
+          explanation:
+            'Processador potente com mais núcleos, ideal para jogos e multitarefas.',
+        },
+        {
+          icon: <MonitorPlay className="h-6 w-6" />,
+          name: 'Placa de Vídeo',
+          value: 'NVIDIA RTX 3060 Ti',
+          description: '8GB GDDR6, Ray Tracing',
+          price: 2199.99,
+          explanation:
+            'Excelente performance para jogos em 1440p com Ray Tracing e DLSS.',
+        },
+        {
+          icon: <MemoryStick className="h-6 w-6" />,
+          name: 'Memória',
+          value: '32GB DDR4 3600MHz',
+          description: '2x16GB, CL18',
+          price: 649.99,
+          explanation: 'Capacidade ampla para jogos exigentes e multitarefas.',
+        },
+        {
+          icon: <HardDrive className="h-6 w-6" />,
+          name: 'Armazenamento',
+          value: 'SSD NVMe 1TB',
+          description: 'PCIe 4.0, 5000MB/s',
+          price: 649.99,
+          explanation: 'Armazenamento de alta velocidade com boa capacidade.',
+        },
+        {
+          icon: <Zap className="h-6 w-6" />,
+          name: 'Fonte',
+          value: '750W 80+ Gold',
+          description: 'Modular, certificada',
+          price: 499.99,
+          explanation:
+            'Fonte de alta qualidade com eficiência Gold e totalmente modular.',
+        },
+      ],
+    },
+    {
+      name: 'Premium',
+      price: 5499.95,
+      components: [
+        {
+          icon: <Cpu className="h-6 w-6" />,
+          name: 'Processador',
+          value: 'AMD Ryzen 7 5800X3D',
+          description: '8 núcleos, 16 threads, 3.4GHz (4.5GHz Turbo)',
+          price: 1799.99,
+          explanation:
+            'O melhor processador para jogos com tecnologia 3D V-Cache.',
+        },
+        {
+          icon: <MonitorPlay className="h-6 w-6" />,
+          name: 'Placa de Vídeo',
+          value: 'NVIDIA RTX 3070',
+          description: '8GB GDDR6, Ray Tracing',
+          price: 2699.99,
+          explanation:
+            'Placa de vídeo potente para jogos em 1440p/4K com Ray Tracing e DLSS.',
+        },
+        {
+          icon: <MemoryStick className="h-6 w-6" />,
+          name: 'Memória',
+          value: '32GB DDR4 3600MHz',
+          description: '2x16GB, CL16',
+          price: 699.99,
+          explanation:
+            'Memória de alta velocidade com baixa latência para máximo desempenho.',
+        },
+        {
+          icon: <HardDrive className="h-6 w-6" />,
+          name: 'Armazenamento',
+          value: 'SSD NVMe 2TB',
+          description: 'PCIe 4.0, 7000MB/s',
+          price: 999.99,
+          explanation:
+            'Armazenamento ultra-rápido com ampla capacidade para biblioteca de jogos.',
+        },
+        {
+          icon: <Zap className="h-6 w-6" />,
+          name: 'Fonte',
+          value: '850W 80+ Gold',
+          description: 'Modular, certificada',
+          price: 599.99,
+          explanation:
+            'Fonte de alta qualidade com potência extra para upgrades futuros.',
+        },
+      ],
+    },
+  ];
+
   return (
     <div className="min-h-[calc(100vh-4rem)] bg-muted/30">
       <div className="container py-8">
@@ -88,7 +245,7 @@ export default function BuilderPage() {
               <div
                 className={`ml-2 text-sm font-medium ${step >= 1 ? 'text-primary' : 'text-muted-foreground'}`}
               >
-                Purpose
+                Objetivo
               </div>
             </div>
             <div className="flex-1 mx-4">
@@ -108,7 +265,7 @@ export default function BuilderPage() {
               <div
                 className={`ml-2 text-sm font-medium ${step >= 2 ? 'text-primary' : 'text-muted-foreground'}`}
               >
-                Budget
+                Orçamento
               </div>
             </div>
             <div className="flex-1 mx-4">
@@ -128,7 +285,7 @@ export default function BuilderPage() {
               <div
                 className={`ml-2 text-sm font-medium ${step >= 3 ? 'text-primary' : 'text-muted-foreground'}`}
               >
-                Result
+                Resultado
               </div>
             </div>
           </div>
@@ -146,11 +303,11 @@ export default function BuilderPage() {
               <Card className="shadow-sm">
                 <CardHeader>
                   <CardTitle className="text-2xl">
-                    What will you use your PC for?
+                    Para que você usará seu PC?
                   </CardTitle>
                   <CardDescription>
-                    Choose the main purpose of your computer so we can optimize
-                    the components.
+                    Escolha o objetivo principal do seu computador para
+                    otimizarmos os componentes.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -172,9 +329,10 @@ export default function BuilderPage() {
                         >
                           <MonitorPlay className="mb-3 h-8 w-8 text-primary" />
                           <div className="text-center">
-                            <h3 className="font-medium">Gaming</h3>
+                            <h3 className="font-medium">Jogos</h3>
                             <p className="text-sm text-muted-foreground">
-                              Optimized for modern games with high frame rates
+                              Otimizado para jogos modernos com altas taxas de
+                              quadros
                             </p>
                           </div>
                         </Label>
@@ -191,10 +349,10 @@ export default function BuilderPage() {
                         >
                           <Cpu className="mb-3 h-8 w-8 text-primary" />
                           <div className="text-center">
-                            <h3 className="font-medium">Work</h3>
+                            <h3 className="font-medium">Trabalho</h3>
                             <p className="text-sm text-muted-foreground">
-                              For productivity, multitasking, and office
-                              applications
+                              Para produtividade, multitarefas e aplicativos de
+                              escritório
                             </p>
                           </div>
                         </Label>
@@ -211,36 +369,70 @@ export default function BuilderPage() {
                         >
                           <HardDrive className="mb-3 h-8 w-8 text-primary" />
                           <div className="text-center">
-                            <h3 className="font-medium">Content Creation</h3>
+                            <h3 className="font-medium">Criação de Conteúdo</h3>
                             <p className="text-sm text-muted-foreground">
-                              For video editing, graphic design, and 3D modeling
+                              Para edição de vídeo, design gráfico e modelagem
+                              3D
                             </p>
                           </div>
                         </Label>
                       </div>
                     </RadioGroup>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="preference">
-                        Do you have any hardware preferences?
-                      </Label>
-                      <Select value={preference} onValueChange={setPreference}>
-                        <SelectTrigger id="preference">
-                          <SelectValue placeholder="Select a preference" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="no-preference">
-                            No preference
-                          </SelectItem>
-                          <SelectItem value="amd">Prefer AMD</SelectItem>
-                          <SelectItem value="intel">Prefer Intel</SelectItem>
-                          <SelectItem value="nvidia">Prefer NVIDIA</SelectItem>
-                        </SelectContent>
-                      </Select>
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-medium">
+                        Preferências de Hardware
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <Label htmlFor="cpu-preference">
+                            Preferência de Processador
+                          </Label>
+                          <Select
+                            value={cpuPreference}
+                            onValueChange={setCpuPreference}
+                          >
+                            <SelectTrigger id="cpu-preference">
+                              <SelectValue placeholder="Selecione uma preferência" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="no-preference">
+                                Sem preferência
+                              </SelectItem>
+                              <SelectItem value="amd">Prefiro AMD</SelectItem>
+                              <SelectItem value="intel">
+                                Prefiro Intel
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="gpu-preference">
+                            Preferência de Placa de Vídeo
+                          </Label>
+                          <Select
+                            value={gpuPreference}
+                            onValueChange={setGpuPreference}
+                          >
+                            <SelectTrigger id="gpu-preference">
+                              <SelectValue placeholder="Selecione uma preferência" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="no-preference">
+                                Sem preferência
+                              </SelectItem>
+                              <SelectItem value="nvidia">
+                                Prefiro NVIDIA
+                              </SelectItem>
+                              <SelectItem value="amd">Prefiro AMD</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
                       <p className="text-xs text-muted-foreground">
-                        This helps us tailor recommendations to your
-                        preferences, but we'll always prioritize performance and
-                        value.
+                        Isso nos ajuda a personalizar as recomendações de acordo
+                        com suas preferências, mas sempre priorizaremos
+                        desempenho e custo-benefício.
                       </p>
                     </div>
                   </div>
@@ -250,7 +442,7 @@ export default function BuilderPage() {
                     onClick={handleNextStep}
                     className="bg-primary hover:bg-primary/90"
                   >
-                    Next
+                    Próximo
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </CardFooter>
@@ -269,47 +461,47 @@ export default function BuilderPage() {
               <Card className="shadow-sm">
                 <CardHeader>
                   <CardTitle className="text-2xl">
-                    What's your budget?
+                    Qual é o seu orçamento?
                   </CardTitle>
                   <CardDescription>
-                    Define how much you want to invest in your PC. We can
-                    suggest small variations to optimize value.
+                    Defina quanto você deseja investir no seu PC. Podemos
+                    sugerir pequenas variações para otimizar o custo-benefício.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-8">
                   <div className="space-y-4">
                     <div className="flex justify-between">
-                      <Label htmlFor="budget">Budget ($)</Label>
+                      <Label htmlFor="budget">Orçamento (R$)</Label>
                       <span className="font-medium text-primary">
-                        ${budget.toLocaleString()}
+                        R$ {budget.toLocaleString('pt-BR')}
                       </span>
                     </div>
                     <Slider
                       id="budget"
-                      min={500}
-                      max={5000}
-                      step={100}
+                      min={2000}
+                      max={15000}
+                      step={500}
                       value={[budget]}
                       onValueChange={(value) => setBudget(value[0])}
                       className="py-4"
                     />
                     <div className="flex justify-between text-sm text-muted-foreground">
-                      <span>$500</span>
-                      <span>$5,000</span>
+                      <span>R$ 2.000</span>
+                      <span>R$ 15.000</span>
                     </div>
                   </div>
 
                   <div className="rounded-lg border p-4 bg-muted/20">
                     <h3 className="font-medium mb-2 flex items-center">
                       <Info className="h-4 w-4 mr-2 text-primary" />
-                      Budget Variation
+                      Variação de Orçamento
                     </h3>
                     <p className="text-sm text-muted-foreground mb-4">
-                      We allow a variation of up to 10% in the budget to
-                      optimize the cost-benefit of the parts. This means we can
-                      suggest configurations between $
-                      {Math.floor(budget * 0.9).toLocaleString()} and $
-                      {Math.ceil(budget * 1.1).toLocaleString()}.
+                      Permitimos uma variação de até 10% no orçamento para
+                      otimizar o custo-benefício das peças. Isso significa que
+                      podemos sugerir configurações entre R${' '}
+                      {Math.floor(budget * 0.9).toLocaleString('pt-BR')} e R${' '}
+                      {Math.ceil(budget * 1.1).toLocaleString('pt-BR')}.
                     </p>
                     <div className="flex items-center space-x-2">
                       <Checkbox id="allow-variation" defaultChecked />
@@ -317,7 +509,8 @@ export default function BuilderPage() {
                         htmlFor="allow-variation"
                         className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                       >
-                        Allow budget variation for better value
+                        Permitir variação de orçamento para melhor
+                        custo-benefício
                       </label>
                     </div>
                   </div>
@@ -325,13 +518,13 @@ export default function BuilderPage() {
                 <CardFooter className="flex justify-between">
                   <Button variant="outline" onClick={handlePrevStep}>
                     <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back
+                    Voltar
                   </Button>
                   <Button
                     onClick={handleNextStep}
                     className="bg-primary hover:bg-primary/90"
                   >
-                    Generate Ideal PC
+                    Gerar PC Ideal
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </CardFooter>
@@ -352,282 +545,421 @@ export default function BuilderPage() {
                   <CardContent className="flex flex-col items-center justify-center py-12">
                     <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary mb-4"></div>
                     <h3 className="text-xl font-medium mb-2">
-                      Building your ideal PC...
+                      Montando seu PC ideal...
                     </h3>
                     <p className="text-muted-foreground">
-                      We're analyzing thousands of combinations to find the best
-                      configuration for you.
+                      Estamos analisando milhares de combinações para encontrar
+                      a melhor configuração para você.
                     </p>
                   </CardContent>
                 </Card>
               ) : (
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  <div className="lg:col-span-2">
-                    <Card className="shadow-sm">
-                      <CardHeader>
-                        <div className="flex justify-between items-center">
-                          <div>
-                            <CardTitle className="text-2xl">
-                              Your Ideal PC
-                            </CardTitle>
-                            <CardDescription>
-                              Optimized configuration for{' '}
-                              {purpose === 'gaming'
-                                ? 'gaming'
-                                : purpose === 'work'
-                                  ? 'work'
-                                  : 'content creation'}
-                            </CardDescription>
+                <div className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {builds.map((build, index) => (
+                      <Card
+                        key={index}
+                        className={`cursor-pointer transition-all duration-300 ${selectedBuild === index ? 'card-highlight' : 'hover:border-primary/30 hover:shadow-sm'}`}
+                        onClick={() => setSelectedBuild(index)}
+                      >
+                        <CardHeader>
+                          <CardTitle>{build.name}</CardTitle>
+                          <CardDescription>
+                            {index === 0
+                              ? 'Melhor custo-benefício'
+                              : index === 1
+                                ? 'Recomendado'
+                                : 'Alto desempenho'}
+                          </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="text-2xl font-bold mb-4">
+                            R$ {build.price.toLocaleString('pt-BR')}
                           </div>
-                          <Badge className="bg-primary hover:bg-primary/90">
-                            Excellent value
-                          </Badge>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <Tabs defaultValue="components">
-                          <TabsList className="grid w-full grid-cols-3">
-                            <TabsTrigger value="components">
-                              Components
-                            </TabsTrigger>
-                            <TabsTrigger value="performance">
-                              Performance
-                            </TabsTrigger>
-                            <TabsTrigger value="prices">Prices</TabsTrigger>
-                          </TabsList>
-                          <TabsContent
-                            value="components"
-                            className="space-y-4 pt-4"
+                          <div className="space-y-2">
+                            {build.components
+                              .slice(0, 3)
+                              .map((component, idx) => (
+                                <div
+                                  key={idx}
+                                  className="flex items-center text-sm"
+                                >
+                                  <div className="mr-2 text-primary">
+                                    {component.icon}
+                                  </div>
+                                  <div className="flex-1">
+                                    {component.name}: {component.value}
+                                  </div>
+                                </div>
+                              ))}
+                            <div className="text-sm text-muted-foreground">
+                              + 2 componentes
+                            </div>
+                          </div>
+                        </CardContent>
+                        <CardFooter>
+                          <Button
+                            variant={
+                              selectedBuild === index ? 'default' : 'outline'
+                            }
+                            className={`w-full ${selectedBuild === index ? 'bg-primary hover:bg-primary/90' : ''}`}
                           >
-                            <div className="space-y-4">
-                              <ComponentItem
-                                icon={<Cpu className="h-6 w-6" />}
-                                name="Processor"
-                                value="AMD Ryzen 7 7800X3D"
-                                description="8 cores, 16 threads, 5.0GHz"
-                                price={449.99}
-                                explanation="Excellent gaming performance with high single-core speeds and 3D V-Cache technology."
-                              />
-                              <ComponentItem
-                                icon={<MonitorPlay className="h-6 w-6" />}
-                                name="Graphics Card"
-                                value="NVIDIA RTX 4070"
-                                description="12GB GDDR6X, Ray Tracing"
-                                price={599.99}
-                                explanation="Great performance for 1440p gaming with DLSS 3 support and ray tracing capabilities."
-                              />
-                              <ComponentItem
-                                icon={<MemoryStick className="h-6 w-6" />}
-                                name="Memory"
-                                value="32GB DDR5 6000MHz"
-                                description="2x16GB, CL36"
-                                price={149.99}
-                                explanation="Fast DDR5 memory with plenty of capacity for gaming and multitasking."
-                              />
-                              <ComponentItem
-                                icon={<HardDrive className="h-6 w-6" />}
-                                name="Storage"
-                                value="2TB NVMe SSD"
-                                description="PCIe 4.0, 7000MB/s"
-                                price={179.99}
-                                explanation="High-speed storage with ample capacity for games, applications, and media."
-                              />
-                              <ComponentItem
-                                icon={<Zap className="h-6 w-6" />}
-                                name="Power Supply"
-                                value="850W 80+ Gold"
-                                description="Modular, certified"
-                                price={119.99}
-                                explanation="Reliable power supply with efficiency certification and headroom for future upgrades."
-                              />
-                            </div>
-                          </TabsContent>
-                          <TabsContent value="performance" className="pt-4">
-                            <div className="space-y-6">
-                              <div>
-                                <h3 className="font-medium mb-2">
-                                  Gaming Performance (1440p)
-                                </h3>
-                                <div className="space-y-3">
-                                  <PerformanceBar
-                                    game="Cyberpunk 2077"
-                                    fps={85}
-                                  />
-                                  <PerformanceBar game="Fortnite" fps={240} />
-                                  <PerformanceBar
-                                    game="Call of Duty: Warzone"
-                                    fps={120}
-                                  />
-                                  <PerformanceBar game="Valorant" fps={360} />
-                                </div>
-                              </div>
-                              <div>
-                                <h3 className="font-medium mb-2">
-                                  Application Performance
-                                </h3>
-                                <div className="space-y-3">
-                                  <PerformanceBar
-                                    app="Adobe Premiere Pro"
-                                    score={92}
-                                  />
-                                  <PerformanceBar app="Blender" score={88} />
-                                  <PerformanceBar app="Photoshop" score={95} />
-                                </div>
-                              </div>
-                            </div>
-                          </TabsContent>
-                          <TabsContent value="prices" className="pt-4">
-                            <div className="space-y-4">
-                              <div className="rounded-lg border p-4">
-                                <h3 className="font-medium mb-2">
-                                  Price Comparison
-                                </h3>
-                                <div className="space-y-3">
-                                  <PriceItem
-                                    store="Amazon"
-                                    price={1499.95}
-                                    bestPrice={true}
-                                  />
-                                  <PriceItem store="Newegg" price={1529.99} />
-                                  <PriceItem store="Best Buy" price={1549.99} />
-                                  <PriceItem
-                                    store="Micro Center"
-                                    price={1519.99}
-                                  />
-                                </div>
-                              </div>
-                              <div className="rounded-lg border p-4 bg-muted/20">
-                                <h3 className="font-medium mb-2">Savings</h3>
-                                <p className="text-sm text-muted-foreground">
-                                  This configuration is{' '}
-                                  <span className="text-green-500 font-medium">
-                                    $0.05 below
-                                  </span>{' '}
-                                  your budget of ${budget.toLocaleString()}.
-                                </p>
-                              </div>
-                            </div>
-                          </TabsContent>
-                        </Tabs>
-                      </CardContent>
-                      <CardFooter className="flex justify-between">
-                        <Button variant="outline" onClick={handlePrevStep}>
-                          <ArrowLeft className="mr-2 h-4 w-4" />
-                          Adjust Budget
-                        </Button>
-                        <div className="flex space-x-2">
-                          <Button variant="outline">
-                            <Share2 className="mr-2 h-4 w-4" />
-                            Share
+                            {selectedBuild === index
+                              ? 'Selecionado'
+                              : 'Selecionar'}
                           </Button>
-                          <Button className="bg-primary hover:bg-primary/90">
-                            <ShoppingCart className="mr-2 h-4 w-4" />
-                            Buy Components
-                          </Button>
-                        </div>
-                      </CardFooter>
-                    </Card>
+                        </CardFooter>
+                      </Card>
+                    ))}
                   </div>
-                  <div>
-                    <Card className="shadow-sm">
-                      <CardHeader>
-                        <CardTitle>Summary</CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        <div className="space-y-2">
-                          <div className="flex justify-between">
-                            <span className="text-muted-foreground">
-                              Purpose
-                            </span>
-                            <span className="font-medium">
-                              {purpose === 'gaming'
-                                ? 'Gaming'
-                                : purpose === 'work'
-                                  ? 'Work'
-                                  : 'Content Creation'}
-                            </span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-muted-foreground">
-                              Preference
-                            </span>
-                            <span className="font-medium">
-                              {preference === 'no-preference'
-                                ? 'No Preference'
-                                : preference === 'amd'
-                                  ? 'AMD'
-                                  : preference === 'intel'
-                                    ? 'Intel'
-                                    : 'NVIDIA'}
-                            </span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-muted-foreground">
-                              Budget
-                            </span>
-                            <span className="font-medium">
-                              ${budget.toLocaleString()}
-                            </span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-muted-foreground">Total</span>
-                            <span className="font-medium">$1,499.95</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-muted-foreground">
-                              Savings
-                            </span>
-                            <span className="font-medium text-green-500">
-                              $0.05
-                            </span>
-                          </div>
-                        </div>
-                        <Separator />
-                        <div>
-                          <h3 className="font-medium mb-2">Compatibility</h3>
-                          <div className="space-y-2">
-                            <div className="flex items-center">
-                              <Check className="h-4 w-4 text-green-500 mr-2" />
-                              <span className="text-sm">
-                                All components are compatible
-                              </span>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div className="lg:col-span-2">
+                      <Card className="shadow-sm">
+                        <CardHeader>
+                          <div className="flex justify-between items-center">
+                            <div>
+                              <CardTitle className="text-2xl">
+                                Seu PC Ideal - {builds[selectedBuild].name}
+                              </CardTitle>
+                              <CardDescription>
+                                Configuração otimizada para{' '}
+                                {purpose === 'gaming'
+                                  ? 'jogos'
+                                  : purpose === 'work'
+                                    ? 'trabalho'
+                                    : 'criação de conteúdo'}
+                              </CardDescription>
                             </div>
-                            <div className="flex items-center">
-                              <Check className="h-4 w-4 text-green-500 mr-2" />
-                              <span className="text-sm">
-                                Power supply has adequate wattage
-                              </span>
-                            </div>
-                            <div className="flex items-center">
-                              <Check className="h-4 w-4 text-green-500 mr-2" />
-                              <span className="text-sm">
-                                Sufficient cooling
-                              </span>
-                            </div>
+                            <Badge className="bg-primary hover:bg-primary/90">
+                              Excelente custo-benefício
+                            </Badge>
                           </div>
-                        </div>
-                        <Separator />
-                        <div>
-                          <h3 className="font-medium mb-2">Alternatives</h3>
-                          <div className="space-y-2">
-                            <Button
-                              variant="outline"
-                              className="w-full justify-start"
+                        </CardHeader>
+                        <CardContent>
+                          <Tabs defaultValue="components">
+                            <TabsList className="grid w-full grid-cols-3">
+                              <TabsTrigger value="components">
+                                Componentes
+                              </TabsTrigger>
+                              <TabsTrigger value="performance">
+                                Desempenho
+                              </TabsTrigger>
+                              <TabsTrigger value="prices">Preços</TabsTrigger>
+                            </TabsList>
+                            <TabsContent
+                              value="components"
+                              className="space-y-4 pt-4"
                             >
-                              <span className="mr-auto">Budget Version</span>
-                              <span className="text-green-500">-$300</span>
+                              <div className="space-y-4">
+                                {builds[selectedBuild].components.map(
+                                  (component, index) => (
+                                    <ComponentItem
+                                      key={index}
+                                      icon={component.icon}
+                                      name={component.name}
+                                      value={component.value}
+                                      description={component.description}
+                                      price={component.price}
+                                      explanation={component.explanation}
+                                    />
+                                  ),
+                                )}
+                              </div>
+                            </TabsContent>
+                            <TabsContent value="performance" className="pt-4">
+                              <div className="space-y-6">
+                                <div>
+                                  <h3 className="font-medium mb-2">
+                                    Desempenho em Jogos (1080p)
+                                  </h3>
+                                  <div className="space-y-3">
+                                    <PerformanceBar
+                                      game="Cyberpunk 2077"
+                                      fps={
+                                        selectedBuild === 0
+                                          ? 65
+                                          : selectedBuild === 1
+                                            ? 85
+                                            : 100
+                                      }
+                                    />
+                                    <PerformanceBar
+                                      game="Fortnite"
+                                      fps={
+                                        selectedBuild === 0
+                                          ? 180
+                                          : selectedBuild === 1
+                                            ? 240
+                                            : 300
+                                      }
+                                    />
+                                    <PerformanceBar
+                                      game="CS2"
+                                      fps={
+                                        selectedBuild === 0
+                                          ? 250
+                                          : selectedBuild === 1
+                                            ? 300
+                                            : 400
+                                      }
+                                    />
+                                    <PerformanceBar
+                                      game="Valorant"
+                                      fps={
+                                        selectedBuild === 0
+                                          ? 280
+                                          : selectedBuild === 1
+                                            ? 360
+                                            : 400
+                                      }
+                                    />
+                                  </div>
+                                </div>
+                                <div>
+                                  <h3 className="font-medium mb-2">
+                                    Desempenho em Aplicativos
+                                  </h3>
+                                  <div className="space-y-3">
+                                    <PerformanceBar
+                                      app="Adobe Premiere Pro"
+                                      score={
+                                        selectedBuild === 0
+                                          ? 82
+                                          : selectedBuild === 1
+                                            ? 92
+                                            : 98
+                                      }
+                                    />
+                                    <PerformanceBar
+                                      app="Blender"
+                                      score={
+                                        selectedBuild === 0
+                                          ? 78
+                                          : selectedBuild === 1
+                                            ? 88
+                                            : 95
+                                      }
+                                    />
+                                    <PerformanceBar
+                                      app="Photoshop"
+                                      score={
+                                        selectedBuild === 0
+                                          ? 85
+                                          : selectedBuild === 1
+                                            ? 95
+                                            : 98
+                                      }
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </TabsContent>
+                            <TabsContent value="prices" className="pt-4">
+                              <div className="space-y-4">
+                                <div className="rounded-lg border p-4">
+                                  <h3 className="font-medium mb-2">
+                                    Comparação de Preços
+                                  </h3>
+                                  <div className="space-y-3">
+                                    <PriceItem
+                                      store="KaBuM!"
+                                      price={builds[selectedBuild].price}
+                                      bestPrice={true}
+                                    />
+                                    <PriceItem
+                                      store="Terabyte"
+                                      price={builds[selectedBuild].price * 1.02}
+                                    />
+                                    <PriceItem
+                                      store="Pichau"
+                                      price={builds[selectedBuild].price * 1.03}
+                                    />
+                                    <PriceItem
+                                      store="Amazon"
+                                      price={builds[selectedBuild].price * 1.05}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="rounded-lg border p-4 bg-muted/20">
+                                  <h3 className="font-medium mb-2">Economia</h3>
+                                  <p className="text-sm text-muted-foreground">
+                                    Esta configuração está{' '}
+                                    <span className="text-green-500 font-medium">
+                                      {builds[selectedBuild].price < budget
+                                        ? `R$ ${(budget - builds[selectedBuild].price).toLocaleString('pt-BR')} abaixo`
+                                        : `R$ ${(builds[selectedBuild].price - budget).toLocaleString('pt-BR')} acima`}
+                                    </span>{' '}
+                                    do seu orçamento de R${' '}
+                                    {budget.toLocaleString('pt-BR')}.
+                                  </p>
+                                </div>
+                              </div>
+                            </TabsContent>
+                          </Tabs>
+                        </CardContent>
+                        <CardFooter className="flex justify-between">
+                          <Button variant="outline" onClick={handlePrevStep}>
+                            <ArrowLeft className="mr-2 h-4 w-4" />
+                            Ajustar Orçamento
+                          </Button>
+                          <div className="flex space-x-2">
+                            <Button variant="outline">
+                              <Share2 className="mr-2 h-4 w-4" />
+                              Compartilhar
                             </Button>
-                            <Button
-                              variant="outline"
-                              className="w-full justify-start"
-                            >
-                              <span className="mr-auto">Premium Version</span>
-                              <span className="text-red-500">+$500</span>
+                            <Button variant="outline">
+                              <Download className="mr-2 h-4 w-4" />
+                              Exportar PDF
+                            </Button>
+                            <Button className="bg-primary hover:bg-primary/90">
+                              <ShoppingCart className="mr-2 h-4 w-4" />
+                              Comprar Componentes
                             </Button>
                           </div>
-                        </div>
-                      </CardContent>
-                    </Card>
+                        </CardFooter>
+                      </Card>
+                    </div>
+                    <div>
+                      <Card className="shadow-sm">
+                        <CardHeader>
+                          <CardTitle>Resumo</CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                          <div className="space-y-2">
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">
+                                Objetivo
+                              </span>
+                              <span className="font-medium">
+                                {purpose === 'gaming'
+                                  ? 'Jogos'
+                                  : purpose === 'work'
+                                    ? 'Trabalho'
+                                    : 'Criação de Conteúdo'}
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">
+                                Preferência CPU
+                              </span>
+                              <span className="font-medium">
+                                {cpuPreference === 'no-preference'
+                                  ? 'Sem Preferência'
+                                  : cpuPreference === 'amd'
+                                    ? 'AMD'
+                                    : 'Intel'}
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">
+                                Preferência GPU
+                              </span>
+                              <span className="font-medium">
+                                {gpuPreference === 'no-preference'
+                                  ? 'Sem Preferência'
+                                  : gpuPreference === 'nvidia'
+                                    ? 'NVIDIA'
+                                    : 'AMD'}
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">
+                                Orçamento
+                              </span>
+                              <span className="font-medium">
+                                R$ {budget.toLocaleString('pt-BR')}
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">
+                                Total
+                              </span>
+                              <span className="font-medium">
+                                R${' '}
+                                {builds[selectedBuild].price.toLocaleString(
+                                  'pt-BR',
+                                )}
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">
+                                Diferença
+                              </span>
+                              <span
+                                className={`font-medium ${builds[selectedBuild].price <= budget ? 'text-green-500' : 'text-amber-500'}`}
+                              >
+                                {builds[selectedBuild].price <= budget
+                                  ? `- R$ ${(budget - builds[selectedBuild].price).toLocaleString('pt-BR')}`
+                                  : `+ R$ ${(builds[selectedBuild].price - budget).toLocaleString('pt-BR')}`}
+                              </span>
+                            </div>
+                          </div>
+                          <Separator />
+                          <div>
+                            <h3 className="font-medium mb-2">
+                              Compatibilidade
+                            </h3>
+                            <div className="space-y-2">
+                              <div className="flex items-center">
+                                <Check className="h-4 w-4 text-green-500 mr-2" />
+                                <span className="text-sm">
+                                  Todos os componentes são compatíveis
+                                </span>
+                              </div>
+                              <div className="flex items-center">
+                                <Check className="h-4 w-4 text-green-500 mr-2" />
+                                <span className="text-sm">
+                                  Fonte tem potência adequada
+                                </span>
+                              </div>
+                              <div className="flex items-center">
+                                <Check className="h-4 w-4 text-green-500 mr-2" />
+                                <span className="text-sm">
+                                  Resfriamento suficiente
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <Separator />
+                          <div>
+                            <h3 className="font-medium mb-2">Avaliação</h3>
+                            <div className="space-y-2">
+                              <div className="flex justify-between text-sm">
+                                <span>Desempenho</span>
+                                <span className="font-medium text-green-500">
+                                  {selectedBuild === 0
+                                    ? 'Bom'
+                                    : selectedBuild === 1
+                                      ? 'Ótimo'
+                                      : 'Excelente'}
+                                </span>
+                              </div>
+                              <div className="flex justify-between text-sm">
+                                <span>Custo-benefício</span>
+                                <span className="font-medium text-green-500">
+                                  {selectedBuild === 0
+                                    ? 'Excelente'
+                                    : selectedBuild === 1
+                                      ? 'Ótimo'
+                                      : 'Bom'}
+                                </span>
+                              </div>
+                              <div className="flex justify-between text-sm">
+                                <span>Durabilidade</span>
+                                <span className="font-medium text-green-500">
+                                  {selectedBuild === 0
+                                    ? '3-4 anos'
+                                    : selectedBuild === 1
+                                      ? '4-5 anos'
+                                      : '5+ anos'}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
                   </div>
                 </div>
               )}
@@ -661,9 +993,9 @@ function ComponentItem({ icon, name, value, description, price, explanation }) {
         <p className="text-xs text-muted-foreground">{description}</p>
       </div>
       <div className="text-right">
-        <p className="font-medium">${price.toLocaleString()}</p>
+        <p className="font-medium">R$ {price.toLocaleString('pt-BR')}</p>
         <a href="#" className="text-xs text-primary hover:underline">
-          View details
+          Ver detalhes
         </a>
       </div>
     </div>
@@ -673,7 +1005,7 @@ function ComponentItem({ icon, name, value, description, price, explanation }) {
 function PerformanceBar({ game, fps, app, score }) {
   const value = fps || score;
   const label = game || app;
-  const metric = fps ? 'FPS' : 'Score';
+  const metric = fps ? 'FPS' : 'Pontos';
 
   let color = 'bg-red-500';
   if (value > 60 && fps) color = 'bg-yellow-500';
@@ -710,14 +1042,14 @@ function PriceItem({ store, price, bestPrice = false }) {
       </div>
       <div className="flex items-center">
         <span className={`font-medium ${bestPrice ? 'text-primary' : ''}`}>
-          ${price.toLocaleString()}
+          R$ {price.toLocaleString('pt-BR')}
         </span>
         {bestPrice && (
           <Badge
             variant="outline"
             className="ml-2 text-xs border-primary text-primary"
           >
-            Best price
+            Melhor preço
           </Badge>
         )}
       </div>
