@@ -58,5 +58,7 @@ export type RecommendationBuild = {
 };
 
 export type RecommendedBuilds = {
-  builds: RecommendationBuild[];
+  data: {
+    builds: RecommendationBuild[];
+  };
 };
