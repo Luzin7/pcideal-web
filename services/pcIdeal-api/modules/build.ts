@@ -1,5 +1,3 @@
-'use server';
-
 import { axiosRequest } from '@/services/utils/request';
 import { RecommendedBuilds } from '../models/recommendedBuild';
 
