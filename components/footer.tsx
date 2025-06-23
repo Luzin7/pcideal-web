@@ -1,4 +1,5 @@
-import { Facebook, Github, HardDrive, Instagram, Twitter } from 'lucide-react';
+import { localRoutePaths } from '@/constants/localRoutePaths';
+import { Github, HardDrive, Linkedin } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Footer() {
@@ -15,21 +16,21 @@ export default function Footer() {
             orçamento.
           </p>
           <div className="flex space-x-4">
-            <Link href="#" className="text-muted-foreground hover:text-primary">
+            <Link
+              href="https://github.com/Luzin7"
+              className="text-muted-foreground hover:text-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Github className="h-5 w-5" />
               <span className="sr-only">GitHub</span>
             </Link>
-            <Link href="#" className="text-muted-foreground hover:text-primary">
-              <Twitter className="h-5 w-5" />
-              <span className="sr-only">Twitter</span>
-            </Link>
-            <Link href="#" className="text-muted-foreground hover:text-primary">
-              <Facebook className="h-5 w-5" />
-              <span className="sr-only">Facebook</span>
-            </Link>
-            <Link href="#" className="text-muted-foreground hover:text-primary">
-              <Instagram className="h-5 w-5" />
-              <span className="sr-only">Instagram</span>
+            <Link
+              href="https://www.linkedin.com/in/lvictordutra/"
+              className="text-muted-foreground hover:text-primary"
+            >
+              <Linkedin className="h-5 w-5" />
+              <span className="sr-only">Linkedin</span>
             </Link>
           </div>
         </div>
@@ -38,7 +39,7 @@ export default function Footer() {
           <ul className="space-y-2 text-sm">
             <li>
               <Link
-                href="/montar"
+                href={localRoutePaths.builder}
                 className="text-muted-foreground hover:text-primary"
               >
                 Montar PC
@@ -46,26 +47,10 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                href="/componentes"
-                className="text-muted-foreground hover:text-primary"
-              >
-                Componentes
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/como-funciona"
+                href={localRoutePaths.howItWorks}
                 className="text-muted-foreground hover:text-primary"
               >
                 Como Funciona
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/doar"
-                className="text-muted-foreground hover:text-primary"
-              >
-                Apoie o Projeto
               </Link>
             </li>
           </ul>
@@ -75,50 +60,26 @@ export default function Footer() {
           <ul className="space-y-2 text-sm">
             <li>
               <Link
-                href="/guias"
-                className="text-muted-foreground hover:text-primary"
-              >
-                Guias
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/faq"
+                href={localRoutePaths.howItWorks}
                 className="text-muted-foreground hover:text-primary"
               >
                 Perguntas Frequentes
               </Link>
             </li>
-            <li>
-              <Link
-                href="/suporte"
-                className="text-muted-foreground hover:text-primary"
-              >
-                Suporte
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/blog"
-                className="text-muted-foreground hover:text-primary"
-              >
-                Blog
-              </Link>
-            </li>
           </ul>
         </div>
         <div>
-          <h3 className="text-sm font-medium mb-4">Empresa</h3>
+          <h3 className="text-sm font-medium mb-4">PcIdeal</h3>
           <ul className="space-y-2 text-sm">
             <li>
               <Link
-                href="/sobre"
+                href={localRoutePaths.landingPage}
                 className="text-muted-foreground hover:text-primary"
               >
                 Sobre
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 href="/privacidade"
                 className="text-muted-foreground hover:text-primary"
@@ -133,24 +94,16 @@ export default function Footer() {
               >
                 Termos
               </Link>
-            </li>
-            <li>
-              <Link
-                href="/contato"
-                className="text-muted-foreground hover:text-primary"
-              >
-                Contato
-              </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
       <div className="container mt-8 pt-8 border-t">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} PcIdeal. Todos os direitos reservados.
+            {new Date().getFullYear()} PcIdeal.
           </p>
-          <div className="flex space-x-4 text-sm">
+          {/* <div className="flex space-x-4 text-sm">
             <Link
               href="/privacidade"
               className="text-muted-foreground hover:text-primary"
@@ -169,7 +122,7 @@ export default function Footer() {
             >
               Política de Cookies
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

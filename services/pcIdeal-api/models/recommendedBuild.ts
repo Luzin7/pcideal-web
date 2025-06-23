@@ -35,6 +35,7 @@ export type Part = {
   specs: Specs;
   price_cents: number;
   url: string;
+  affiliate_url: string;
   store: string;
   updated_at: string;
 };

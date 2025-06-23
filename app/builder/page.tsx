@@ -37,18 +37,17 @@ import {
 } from '@/services/pcIdeal-api/modules/build';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
+  Aperture,
   ArrowLeft,
   ArrowRight,
   Check,
   CircuitBoard,
   Cpu,
-  Download,
   HardDrive,
   Info,
   MemoryStick,
   MonitorPlay,
-  Share2,
-  ShoppingCart,
+  X,
   Zap,
 } from 'lucide-react';
 import { useState } from 'react';
@@ -89,13 +88,13 @@ export default function BuilderPage() {
   const [selectedBuild, setSelectedBuild] = useState(0);
   type BuildCompleteType = RecommendationBuild[] | null;
   const [buildComplete, setBuildComplete] = useState<BuildCompleteType>(null);
+  const [buildNotFound, setBuildNotFound] = useState<boolean>(false);
 
   const handleBuild = async (): Promise<RecommendationBuild[] | null> => {
     setLoading(true);
     const result = await createBuild({
       budget,
       cpuPreference,
-
       gpuPreference,
       usageType,
     });
@@ -103,8 +102,12 @@ export default function BuilderPage() {
     if (!result.success) {
       console.error(result.error);
       setLoading(false);
+      setBuildNotFound(true);
       return null;
     }
+
+    setBuildNotFound(false);
+    setLoading(false);
 
     return result.data.data.builds;
   };
@@ -115,7 +118,6 @@ export default function BuilderPage() {
       const builds = await handleBuild();
       if (!builds) {
         setLoading(false);
-        return console.log('deu errado');
       }
       setBuildComplete(builds);
     } else {
@@ -130,7 +132,6 @@ export default function BuilderPage() {
   return (
     <div className="min-h-[calc(100vh-4rem)] bg-muted/30">
       <div className="container py-8">
-        {/* Progress Steps */}
         <div className="mb-8">
           <div className="flex justify-between">
             <div className="flex items-center">
@@ -232,8 +233,8 @@ export default function BuilderPage() {
                           <div className="text-center">
                             <h3 className="font-medium">Jogos</h3>
                             <p className="text-sm text-muted-foreground">
-                              Otimizado para jogos modernos com altas taxas de
-                              quadros
+                              Otimizado para jogos modernos com foco em altas
+                              taxas de quadros
                             </p>
                           </div>
                         </Label>
@@ -268,12 +269,12 @@ export default function BuilderPage() {
                           htmlFor="CONTENT_CREATOR"
                           className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-6 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                         >
-                          <HardDrive className="mb-3 h-8 w-8 text-primary" />
+                          <Aperture className="mb-3 h-8 w-8 text-primary" />
                           <div className="text-center">
                             <h3 className="font-medium">Criação de Conteúdo</h3>
                             <p className="text-sm text-muted-foreground">
-                              Para edição de vídeo, design gráfico e modelagem
-                              3D
+                              Para edição de vídeo, produção musical, design
+                              gráfico, modelagem 3D
                             </p>
                           </div>
                         </Label>
@@ -435,19 +436,50 @@ export default function BuilderPage() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
             >
-              {(loading && !buildComplete) || buildComplete === null ? (
-                <Card className="shadow-sm">
-                  <CardContent className="flex flex-col items-center justify-center py-12">
-                    <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary mb-4"></div>
-                    <h3 className="text-xl font-medium mb-2">
-                      Montando seu PC ideal...
-                    </h3>
-                    <p className="text-muted-foreground">
-                      Estamos analisando milhares de combinações para encontrar
-                      a melhor configuração para você.
-                    </p>
-                  </CardContent>
-                </Card>
+              {loading || buildComplete === null ? (
+                buildNotFound ? (
+                  <Card className="shadow-sm bg-background">
+                    <CardContent className="flex flex-col items-center justify-center py-12">
+                      <div className="mb-4">
+                        <X className="h-16 w-16 text-background-foreground" />
+                      </div>
+                      <h3 className="text-2xl font-bold mb-2 text-primary">
+                        Não encontramos uma build ideal 😕
+                      </h3>
+                      <p className="text-muted-foreground text-center mb-6 max-w-md">
+                        Você atingiu o limite de requisições por hora ou
+                        infelizmente, não conseguimos montar uma configuração
+                        que atenda ao seu orçamento e preferências no momento.
+                        <br />
+                        Tente ajustar o orçamento, remover preferências ou
+                        aguarde novas recomendações em breve!
+                      </p>
+                      <Button
+                        onClick={() => {
+                          setBuildNotFound(false);
+                          setStep(2);
+                        }}
+                        className="mt-2"
+                      >
+                        <ArrowLeft className="mr-2 h-4 w-4" />
+                        Ajustar Orçamento/Preferências
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <Card className="shadow-sm">
+                    <CardContent className="flex flex-col items-center justify-center py-12">
+                      <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary mb-4"></div>
+                      <h3 className="text-xl font-medium mb-2">
+                        Montando seu PC ideal...
+                      </h3>
+                      <p className="text-muted-foreground">
+                        Estamos analisando milhares de combinações para
+                        encontrar a melhor configuração para você.
+                      </p>
+                    </CardContent>
+                  </Card>
+                )
               ) : (
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -664,7 +696,7 @@ export default function BuilderPage() {
                             <ArrowLeft className="mr-2 h-4 w-4" />
                             Ajustar Orçamento
                           </Button>
-                          <div className="flex space-x-2">
+                          {/* <div className="flex space-x-2">
                             <Button variant="outline">
                               <Share2 className="mr-2 h-4 w-4" />
                               Compartilhar
@@ -677,7 +709,7 @@ export default function BuilderPage() {
                               <ShoppingCart className="mr-2 h-4 w-4" />
                               Comprar Componentes
                             </Button>
-                          </div>
+                          </div> */}
                         </CardFooter>
                       </Card>
                     </div>
@@ -696,6 +728,9 @@ export default function BuilderPage() {
                       <Card className="shadow-sm">
                         <CardHeader>
                           <CardTitle>Resumo</CardTitle>
+                          <CardDescription>
+                            {buildComplete[selectedBuild].description}
+                          </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
                           <div className="space-y-2">
@@ -801,16 +836,10 @@ export default function BuilderPage() {
                                   Fonte tem potência adequada
                                 </span>
                               </div>
-                              <div className="flex items-center">
-                                <Check className="h-4 w-4 text-green-500 mr-2" />
-                                <span className="text-sm">
-                                  Resfriamento suficiente
-                                </span>
-                              </div>
                             </div>
                           </div>
-                          <Separator />
-                          <div>
+                          {/* <Separator /> */}
+                          {/* <div>
                             <h3 className="font-medium mb-2">Avaliação</h3>
                             <div className="space-y-2">
                               <div className="flex justify-between text-sm">
@@ -834,8 +863,14 @@ export default function BuilderPage() {
                                 </span>
                               </div>
                             </div>
-                          </div>
+                          </div> */}
+                          <Separator />
                         </CardContent>
+                        <CardFooter>
+                          <CardDescription>
+                            {buildComplete[selectedBuild].summary}
+                          </CardDescription>
+                        </CardFooter>
                       </Card>
                     </div>
                   </div>
@@ -886,12 +921,12 @@ function ComponentItem({
           )}
         </p>
         <a
-          href={part.url}
+          href={part.affiliate_url}
           target="_blank"
           rel="noopener noreferrer"
           className="text-xs text-primary hover:underline"
         >
-          Ver detalhes
+          Comprar na Kabum
         </a>
       </div>
     </div>
