@@ -47,6 +47,7 @@ import {
   Info,
   MemoryStick,
   MonitorPlay,
+  X,
   Zap,
 } from 'lucide-react';
 import { useState } from 'react';
@@ -435,49 +436,50 @@ export default function BuilderPage() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
             >
-              {buildNotFound ? (
-                <Card className="shadow-sm border-2 border-amber-400 bg-amber-50">
-                  <CardContent className="flex flex-col items-center justify-center py-12">
-                    <div className="mb-4">
-                      <Aperture className="h-16 w-16 text-amber-500" />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-2 text-amber-700">
-                      Não encontramos uma build ideal 😕
-                    </h3>
-                    <p className="text-muted-foreground text-center mb-6 max-w-md">
-                      Infelizmente, não conseguimos montar uma configuração que
-                      atenda ao seu orçamento e preferências no momento.
-                      <br />
-                      Tente ajustar o orçamento, remover preferências ou aguarde
-                      novas recomendações em breve!
-                    </p>
-                    <Button
-                      variant="outline"
-                      onClick={() => {
-                        setBuildNotFound(false);
-                        setStep(2);
-                      }}
-                      className="mt-2"
-                    >
-                      <ArrowLeft className="mr-2 h-4 w-4" />
-                      Ajustar Orçamento/Preferências
-                    </Button>
-                  </CardContent>
-                </Card>
-              ) : null}
               {loading || buildComplete === null ? (
-                <Card className="shadow-sm">
-                  <CardContent className="flex flex-col items-center justify-center py-12">
-                    <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary mb-4"></div>
-                    <h3 className="text-xl font-medium mb-2">
-                      Montando seu PC ideal...
-                    </h3>
-                    <p className="text-muted-foreground">
-                      Estamos analisando milhares de combinações para encontrar
-                      a melhor configuração para você.
-                    </p>
-                  </CardContent>
-                </Card>
+                buildNotFound ? (
+                  <Card className="shadow-sm bg-background">
+                    <CardContent className="flex flex-col items-center justify-center py-12">
+                      <div className="mb-4">
+                        <X className="h-16 w-16 text-background-foreground" />
+                      </div>
+                      <h3 className="text-2xl font-bold mb-2 text-primary">
+                        Não encontramos uma build ideal 😕
+                      </h3>
+                      <p className="text-muted-foreground text-center mb-6 max-w-md">
+                        Você atingiu o limite de requisições por hora ou
+                        infelizmente, não conseguimos montar uma configuração
+                        que atenda ao seu orçamento e preferências no momento.
+                        <br />
+                        Tente ajustar o orçamento, remover preferências ou
+                        aguarde novas recomendações em breve!
+                      </p>
+                      <Button
+                        onClick={() => {
+                          setBuildNotFound(false);
+                          setStep(2);
+                        }}
+                        className="mt-2"
+                      >
+                        <ArrowLeft className="mr-2 h-4 w-4" />
+                        Ajustar Orçamento/Preferências
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <Card className="shadow-sm">
+                    <CardContent className="flex flex-col items-center justify-center py-12">
+                      <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary mb-4"></div>
+                      <h3 className="text-xl font-medium mb-2">
+                        Montando seu PC ideal...
+                      </h3>
+                      <p className="text-muted-foreground">
+                        Estamos analisando milhares de combinações para
+                        encontrar a melhor configuração para você.
+                      </p>
+                    </CardContent>
+                  </Card>
+                )
               ) : (
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
