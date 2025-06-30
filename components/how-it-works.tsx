@@ -60,7 +60,7 @@ export default function HowItWorks() {
             </p>
           </div>
           <div className="flex flex-col items-center text-center space-y-2">
-            <div className="text-4xl font-bold text-primary">1.000+</div>
+            <div className="text-4xl font-bold text-primary">3.000+</div>
             <p className="text-muted-foreground">
               Componentes catalogados — com novos entrando todo mês
             </p>
