@@ -130,20 +130,20 @@ export default function BuilderPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-muted/30">
+    <div className="bg-muted/30">
       <div className="container py-8">
         <div className="mb-8">
-          <div className="flex justify-between">
+          <div className="flex justify-between items-center">
             <div className="flex items-center">
               <div
-                className={`flex h-8 w-8 items-center justify-center rounded-full ${
+                className={`flex h-7 w-7 items-center justify-center rounded-full ${
                   step >= 1 ? 'bg-primary' : 'bg-muted'
                 } text-primary-foreground`}
               >
                 1
               </div>
               <div
-                className={`ml-2 text-sm font-medium ${step >= 1 ? 'text-primary' : 'text-muted-foreground'}`}
+                className={`md:ml-2 text-sm font-medium ${step >= 1 ? 'text-primary' : 'text-muted-foreground'}`}
               >
                 Objetivo
               </div>
@@ -156,14 +156,14 @@ export default function BuilderPage() {
             </div>
             <div className="flex items-center">
               <div
-                className={`flex h-8 w-8 items-center justify-center rounded-full ${
+                className={`flex h-7 w-7 items-center justify-center rounded-full ${
                   step >= 2 ? 'bg-primary' : 'bg-muted'
                 } text-primary-foreground`}
               >
                 2
               </div>
               <div
-                className={`ml-2 text-sm font-medium ${step >= 2 ? 'text-primary' : 'text-muted-foreground'}`}
+                className={`md:ml-2 text-sm font-medium ${step >= 2 ? 'text-primary' : 'text-muted-foreground'}`}
               >
                 Orçamento
               </div>
@@ -176,14 +176,14 @@ export default function BuilderPage() {
             </div>
             <div className="flex items-center">
               <div
-                className={`flex h-8 w-8 items-center justify-center rounded-full ${
+                className={`flex h-7 w-7 items-center justify-center rounded-full ${
                   step >= 3 ? 'bg-primary' : 'bg-muted'
                 } text-primary-foreground`}
               >
                 3
               </div>
               <div
-                className={`ml-2 text-sm font-medium ${step >= 3 ? 'text-primary' : 'text-muted-foreground'}`}
+                className={`md:ml-2 text-sm font-medium ${step >= 3 ? 'text-primary' : 'text-muted-foreground'}`}
               >
                 Resultado
               </div>
@@ -910,7 +910,10 @@ function ComponentItem({
             </Tooltip>
           </TooltipProvider> */}
         </div>
-        <p className="text-sm">{part.model}</p>
+        <p className="text-sm">
+          {part.brand.toUpperCase()} {' '}
+          {part.model}
+        </p>
         {/* <p className="text-xs text-muted-foreground">asdad</p> */}
       </div>
       <div className="text-right">

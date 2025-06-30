@@ -1,7 +1,6 @@
 'use client';
 
 import { ThemeToggle } from '@/components/theme-toggle';
-import { Button } from '@/components/ui/button';
 import { localRoutePaths } from '@/constants/localRoutePaths';
 import { HardDrive, Menu, X } from 'lucide-react';
 import Link from 'next/link';
@@ -95,7 +94,7 @@ export default function Header() {
           <div className="container py-4 space-y-4">
             <nav className="flex flex-col space-y-4">
               <Link
-                href="/"
+                href={localRoutePaths.landingPage}
                 className={`text-sm font-medium transition-colors hover:text-primary ${
                   isActive('/') ? 'text-primary' : 'text-foreground/60'
                 }`}
@@ -104,7 +103,7 @@ export default function Header() {
                 Início
               </Link>
               <Link
-                href="/montar"
+                href={localRoutePaths.builder}
                 className={`text-sm font-medium transition-colors hover:text-primary ${
                   isActive('/montar') ? 'text-primary' : 'text-foreground/60'
                 }`}
@@ -112,7 +111,7 @@ export default function Header() {
               >
                 Montar PC
               </Link>
-              <Link
+              {/* <Link
                 href="/componentes"
                 className={`text-sm font-medium transition-colors hover:text-primary ${
                   isActive('/componentes')
@@ -122,9 +121,9 @@ export default function Header() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Componentes
-              </Link>
+              </Link> */}
               <Link
-                href="/como-funciona"
+                href={localRoutePaths.howItWorks}
                 className={`text-sm font-medium transition-colors hover:text-primary ${
                   isActive('/como-funciona')
                     ? 'text-primary'
@@ -135,7 +134,7 @@ export default function Header() {
                 Como Funciona
               </Link>
             </nav>
-            <div className="flex flex-col space-y-2">
+            {/* <div className="flex flex-col space-y-2">
               <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
                 <Button variant="outline" className="w-full">
                   Entrar
@@ -146,7 +145,7 @@ export default function Header() {
                   Cadastrar
                 </Button>
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       )}
