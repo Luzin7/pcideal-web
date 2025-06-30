@@ -33,7 +33,7 @@ export default function Home() {
                   compatibilidade. Apenas o melhor PC dentro do seu orçamento.
                 </p>
               </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
+              <div className="flex flex-col items-center gap-2 min-[400px]:flex-row">
                 <Link href={builder}>
                   <Button
                     size="lg"
@@ -133,43 +133,6 @@ export default function Home() {
           <HowItWorks />
         </div>
       </section>
-
-      {/* Testimonials */}
-      {/* <section className="w-full py-12 md:py-24 lg:py-32 bg-muted/40">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">
-                Depoimentos
-              </div>
-              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                O que nossos usuários dizem
-              </h2>
-              <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Milhares de pessoas já montaram seus PCs com nossa ajuda.
-              </p>
-            </div>
-          </div>
-          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 md:grid-cols-3">
-            <TestimonialCard
-              quote="Nunca entendi nada de hardware, mas consegui montar um PC incrível para jogos com o PcIdeal. Economizei mais de R$ 1.500!"
-              author="Carlos Silva"
-              role="Gamer"
-            />
-            <TestimonialCard
-              quote="Como técnico de TI, o PcIdeal me ajuda a criar orçamentos muito mais rápido e com mais confiança para meus clientes."
-              author="Ana Oliveira"
-              role="Técnica de TI"
-            />
-            <TestimonialCard
-              quote="Eu tinha medo de comprar peças incompatíveis. O PcIdeal me deu confiança e montei um PC perfeito para edição de vídeo."
-              author="Marcos Santos"
-              role="YouTuber"
-            />
-          </div>
-        </div>
-      </section> */}
-
       {/* CTA Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-primary text-primary-foreground">
         <div className="container px-4 md:px-6">
