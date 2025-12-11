@@ -30,6 +30,7 @@ export default function Header() {
               className={`text-sm font-medium transition-colors hover:text-primary ${
                 isActive('/') ? 'text-primary' : 'text-foreground/60'
               }`}
+              aria-label="Página inicial"
             >
               Início
             </Link>
@@ -38,6 +39,7 @@ export default function Header() {
               className={`text-sm font-medium transition-colors hover:text-primary ${
                 isActive('/montar') ? 'text-primary' : 'text-foreground/60'
               }`}
+              aria-label="Montar PC"
             >
               Montar PC
             </Link>
@@ -56,6 +58,7 @@ export default function Header() {
                   ? 'text-primary'
                   : 'text-foreground/60'
               }`}
+              aria-label="Como funciona o PcIdeal"
             >
               Como Funciona
             </Link>
@@ -78,7 +81,8 @@ export default function Header() {
           <button
             className="md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? (
               <X className="h-6 w-6" />
