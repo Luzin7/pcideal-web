@@ -1,5 +1,6 @@
 'use client';
 
+import { BuilderLoadingSkeleton } from '@/components/builder-loading';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -69,11 +70,11 @@ const typePartIconMapper = {
   gpu: <MonitorPlay className="h-6 w-6 text-primary" />,
   psu: <Zap className="h-6 w-6 text-primary" />,
 };
-type BuildType = 'economic' | 'balanced' | 'pro';
+type BuildType = 'economic' | 'balanced' | 'performance';
 const typeMapper = {
   economic: 'Econômico',
   balanced: 'Balanceado',
-  pro: 'Plus',
+  performance: 'Performance',
 };
 
 export default function BuilderPage() {
@@ -467,23 +468,12 @@ export default function BuilderPage() {
                     </CardContent>
                   </Card>
                 ) : (
-                  <Card className="shadow-sm">
-                    <CardContent className="flex flex-col items-center justify-center py-12">
-                      <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary mb-4"></div>
-                      <h3 className="text-xl font-medium mb-2">
-                        Montando seu PC ideal...
-                      </h3>
-                      <p className="text-muted-foreground">
-                        Estamos analisando milhares de combinações para
-                        encontrar a melhor configuração para você.
-                      </p>
-                    </CardContent>
-                  </Card>
+                  <BuilderLoadingSkeleton />
                 )
               ) : (
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {['economic', 'balanced', 'pro'].map((type, index) => {
+                    {['economic', 'balanced', 'performance'].map((type, index) => {
                       const build = buildComplete.find(
                         (b) => b.build_type.toLowerCase() === type,
                       );
