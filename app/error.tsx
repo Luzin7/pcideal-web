@@ -41,7 +41,10 @@ export default function Error({
             <Button onClick={reset} className="flex-1">
               Tentar novamente
             </Button>
-            <Button variant="outline" onClick={() => (window.location.href = '/')}>
+            <Button
+              variant="outline"
+              onClick={() => (window.location.href = '/')}
+            >
               Voltar ao início
             </Button>
           </div>

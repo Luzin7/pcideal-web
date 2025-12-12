@@ -1,14 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import {
-    Check,
-    Cpu,
-    DollarSign,
-    HardDrive,
-    MemoryStick,
-    MonitorPlay,
-    Sparkles,
-    Zap,
+  Check,
+  Cpu,
+  DollarSign,
+  HardDrive,
+  MemoryStick,
+  MonitorPlay,
+  Sparkles,
+  Zap,
 } from 'lucide-react';
 
 // Cache da página por 1 dia (conteúdo estático)

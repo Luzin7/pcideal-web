@@ -4,13 +4,13 @@ import HowItWorks from '@/components/how-it-works';
 import { Button } from '@/components/ui/button';
 import { localRoutePaths } from '@/constants/localRoutePaths';
 import {
-    ArrowRight,
-    Check,
-    Cpu,
-    DollarSign,
-    MonitorPlay,
-    Share2,
-    Zap,
+  ArrowRight,
+  Check,
+  Cpu,
+  DollarSign,
+  MonitorPlay,
+  Share2,
+  Zap,
 } from 'lucide-react';
 import Link from 'next/link';
 
