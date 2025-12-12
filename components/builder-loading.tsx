@@ -4,7 +4,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 export function BuilderLoadingSkeleton() {
   return (
     <Card className="shadow-sm">
-      <CardContent className="flex items-center justify-center gap-4 py-12">
+      <CardContent className="flex flex-col items-center justify-center py-12">
         <div className="relative mb-6">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary"></div>
           <div className="absolute inset-0 rounded-full h-16 w-16 border-t-2 border-primary/20"></div>
@@ -14,7 +14,7 @@ export function BuilderLoadingSkeleton() {
           Estamos analisando milhares de combinações para encontrar a melhor
           configuração para você.
         </p>
-        <div className="w-full max-w-md mt-6 space-y-2">
+        <div className="w-full max-w-md mt-6 mt-auto space-y-2">
           <div className="flex items-center gap-2">
             <div className="h-2 w-2 bg-primary rounded-full animate-pulse" />
             <span className="text-sm text-muted-foreground">
