@@ -4,7 +4,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 export function BuilderLoadingSkeleton() {
   return (
     <Card className="shadow-sm">
-      <CardContent className="flex flex-col items-center justify-center py-12">
+      <CardContent className="flex items-center justify-center gap-4 py-12">
         <div className="relative mb-6">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary"></div>
           <div className="absolute inset-0 rounded-full h-16 w-16 border-t-2 border-primary/20"></div>
