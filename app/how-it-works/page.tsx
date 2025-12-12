@@ -11,6 +11,9 @@ import {
   Zap,
 } from 'lucide-react';
 
+// Cache da página por 1 dia (conteúdo estático)
+export const revalidate = 86400;
+
 export default function HowItWorksPage() {
   return (
     <div className="container py-12">

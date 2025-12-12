@@ -3,12 +3,12 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
@@ -301,7 +301,18 @@ export default function ComponentesPage() {
   );
 }
 
-function ComponentCard({ component }) {
+interface Component {
+  id?: number;
+  name: string;
+  specs: string;
+  price: number;
+  rating: number;
+  reviews: number;
+  badge?: string | null;
+  icon: React.ReactNode;
+}
+
+function ComponentCard({ component }: { component: Component }) {
   return (
     <Card className="overflow-hidden transition-all hover-card">
       <CardContent className="p-0">

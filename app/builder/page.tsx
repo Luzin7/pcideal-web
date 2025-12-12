@@ -1,5 +1,6 @@
 'use client';
 
+import { BuilderLoadingSkeleton } from '@/components/builder-loading';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -69,11 +70,11 @@ const typePartIconMapper = {
   gpu: <MonitorPlay className="h-6 w-6 text-primary" />,
   psu: <Zap className="h-6 w-6 text-primary" />,
 };
-type BuildType = 'economic' | 'balanced' | 'pro';
+type BuildType = 'economic' | 'balanced' | 'performance';
 const typeMapper = {
   economic: 'Econômico',
   balanced: 'Balanceado',
-  pro: 'Plus',
+  performance: 'Performance',
 };
 
 export default function BuilderPage() {
@@ -467,119 +468,114 @@ export default function BuilderPage() {
                     </CardContent>
                   </Card>
                 ) : (
-                  <Card className="shadow-sm">
-                    <CardContent className="flex flex-col items-center justify-center py-12">
-                      <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary mb-4"></div>
-                      <h3 className="text-xl font-medium mb-2">
-                        Montando seu PC ideal...
-                      </h3>
-                      <p className="text-muted-foreground">
-                        Estamos analisando milhares de combinações para
-                        encontrar a melhor configuração para você.
-                      </p>
-                    </CardContent>
-                  </Card>
+                  <BuilderLoadingSkeleton />
                 )
               ) : (
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {['economic', 'balanced', 'pro'].map((type, index) => {
-                      const build = buildComplete.find(
-                        (b) => b.build_type.toLowerCase() === type,
-                      );
+                    {['economic', 'balanced', 'performance'].map(
+                      (type, index) => {
+                        const build = buildComplete.find(
+                          (b) => b.build_type.toLowerCase() === type,
+                        );
 
-                      return (
-                        <Card
-                          key={index}
-                          className={`cursor-pointer transition-all duration-300 ${
-                            selectedBuild === index
-                              ? 'card-highlight'
-                              : 'hover:border-primary/30 hover:shadow-sm'
-                          }`}
-                          onClick={() => build && setSelectedBuild(index)}
-                        >
-                          <CardHeader>
-                            <CardTitle>
-                              {typeMapper[type as BuildType]}
-                            </CardTitle>
-                            <CardDescription>
-                              {index === 0
-                                ? 'Melhor custo-benefício'
-                                : index === 1
-                                  ? 'Recomendado'
-                                  : 'Mais desempenho'}
-                            </CardDescription>
-                          </CardHeader>
-                          {build ? (
-                            <>
-                              <CardContent>
-                                <div className="text-2xl font-bold mb-4">
-                                  R${' '}
-                                  {(build.build_value / 100).toLocaleString(
-                                    'pt-BR',
-                                  )}
-                                </div>
-                                <div className="space-y-2">
-                                  {Object.entries(build.parts)
-                                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                                    .filter(([_, part]) => part)
-                                    .slice(0, 3)
-                                    .map(([key, part], idx) => (
-                                      <div
-                                        key={idx}
-                                        className="flex items-center text-sm"
-                                      >
-                                        <div className="mr-2 text-primary">
-                                          {
-                                            typePartIconMapper[
-                                              key as keyof BuildParts
-                                            ]
-                                          }
-                                        </div>
-                                        <div className="flex-1">
-                                          {partLabels[key as keyof BuildParts]}:{' '}
-                                          {part!.brand} {part!.model}
-                                        </div>
-                                      </div>
-                                    ))}
-                                  <div className="text-sm text-muted-foreground">
-                                    + {Object.keys(build.parts).length - 3}{' '}
-                                    componentes
+                        return (
+                          <Card
+                            key={index}
+                            className={`cursor-pointer transition-all duration-300 ${
+                              selectedBuild === index
+                                ? 'card-highlight'
+                                : 'hover:border-primary/30 hover:shadow-sm'
+                            }`}
+                            onClick={() => build && setSelectedBuild(index)}
+                          >
+                            <CardHeader>
+                              <CardTitle>
+                                {typeMapper[type as BuildType]}
+                              </CardTitle>
+                              <CardDescription>
+                                {index === 0
+                                  ? 'Melhor custo-benefício'
+                                  : index === 1
+                                    ? 'Recomendado'
+                                    : 'Mais desempenho'}
+                              </CardDescription>
+                            </CardHeader>
+                            {build ? (
+                              <>
+                                <CardContent>
+                                  <div className="text-2xl font-bold mb-4">
+                                    R${' '}
+                                    {(build.build_value / 100).toLocaleString(
+                                      'pt-BR',
+                                    )}
                                   </div>
+                                  <div className="space-y-2">
+                                    {Object.entries(build.parts)
+                                      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                                      .filter(([_, part]) => part)
+                                      .slice(0, 3)
+                                      .map(([key, part], idx) => (
+                                        <div
+                                          key={idx}
+                                          className="flex items-center text-sm"
+                                        >
+                                          <div className="mr-2 text-primary">
+                                            {
+                                              typePartIconMapper[
+                                                key as keyof BuildParts
+                                              ]
+                                            }
+                                          </div>
+                                          <div className="flex-1">
+                                            {
+                                              partLabels[
+                                                key as keyof BuildParts
+                                              ]
+                                            }
+                                            : {part!.brand} {part!.model}
+                                          </div>
+                                        </div>
+                                      ))}
+                                    <div className="text-sm text-muted-foreground">
+                                      + {Object.keys(build.parts).length - 3}{' '}
+                                      componentes
+                                    </div>
+                                  </div>
+                                </CardContent>
+                                <CardFooter>
+                                  <Button
+                                    variant={
+                                      selectedBuild === index
+                                        ? 'default'
+                                        : 'outline'
+                                    }
+                                    className={`w-full ${
+                                      selectedBuild === index
+                                        ? 'bg-primary hover:bg-primary/90'
+                                        : ''
+                                    }`}
+                                  >
+                                    {selectedBuild === index
+                                      ? 'Selecionado'
+                                      : 'Selecionar'}
+                                  </Button>
+                                </CardFooter>
+                              </>
+                            ) : (
+                              <CardContent>
+                                <div className="text-center text-muted-foreground">
+                                  Ainda não temos uma build ideal para esta
+                                  categoria, mas estamos trabalhando para
+                                  expandir nossas recomendações. Em breve, mais
+                                  opções estarão disponíveis.
                                 </div>
                               </CardContent>
-                              <CardFooter>
-                                <Button
-                                  variant={
-                                    selectedBuild === index
-                                      ? 'default'
-                                      : 'outline'
-                                  }
-                                  className={`w-full ${
-                                    selectedBuild === index
-                                      ? 'bg-primary hover:bg-primary/90'
-                                      : ''
-                                  }`}
-                                >
-                                  {selectedBuild === index
-                                    ? 'Selecionado'
-                                    : 'Selecionar'}
-                                </Button>
-                              </CardFooter>
-                            </>
-                          ) : (
-                            <CardContent>
-                              <div className="text-center text-muted-foreground">
-                                Ainda não temos uma build ideal para esta
-                                categoria, mas estamos trabalhando para expandir
-                                nossas recomendações. Em breve, mais opções
-                                estarão disponíveis.
-                              </div>
-                            </CardContent>
-                          )}
-                        </Card>
-                      );
-                    })}
+                            )}
+                          </Card>
+                        );
+                      },
+                    )}
                   </div>
 
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -911,8 +907,7 @@ function ComponentItem({
           </TooltipProvider> */}
         </div>
         <p className="text-sm">
-          {part.brand.toUpperCase()} {' '}
-          {part.model}
+          {part.brand.toUpperCase()} {part.model}
         </p>
         {/* <p className="text-xs text-muted-foreground">asdad</p> */}
       </div>

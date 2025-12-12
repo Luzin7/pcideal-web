@@ -14,6 +14,9 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
+// Cache da página por 1 hora (revalidate ISR)
+export const revalidate = 3600;
+
 export default function Home() {
   const { howItWorks, builder } = localRoutePaths;
   return (
