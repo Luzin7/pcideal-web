@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t py-8 md:py-12 bg-background">
+    <footer className="w-full border-t py-8 md:py-12 bg-muted/20">
       <div className="container grid gap-8 md:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4">
           <Link href="/" className="flex items-center space-x-2">
@@ -73,7 +73,7 @@ export default function Footer() {
           <ul className="space-y-2 text-sm">
             <li>
               <Link
-                href={localRoutePaths.landingPage}
+                href={localRoutePaths.about}
                 className="text-muted-foreground hover:text-primary"
               >
                 Sobre

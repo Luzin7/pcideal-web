@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import {
   Check,
@@ -7,96 +7,130 @@ import {
   HardDrive,
   MemoryStick,
   MonitorPlay,
+  ShieldCheck,
   Sparkles,
   Zap,
 } from 'lucide-react';
 
-// Cache da página por 1 dia (conteúdo estático)
 export const revalidate = 86400;
 
 export default function HowItWorksPage() {
   return (
-    <div className="container py-12">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Como Funciona o PcIdeal</h1>
-          <p className="text-xl text-muted-foreground">
-            Entenda como nossa plataforma ajuda você a montar o PC perfeito para
-            suas necessidades
+    <div className="container py-16 md:py-24">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-20 space-y-6">
+          <div className="inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium text-primary bg-primary/10">
+            Processo Simplificado
+          </div>
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
+            Como Funciona o <span className="text-primary">PcIdeal</span>
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Entenda como nossa engine transforma seu orçamento em performance
+            máxima, sem desperdícios e sem complicações.
           </p>
         </div>
 
-        <div className="space-y-12">
+        <div className="space-y-24">
           <section>
-            <h2 className="text-2xl font-bold mb-4">Nosso Processo</h2>
-            <p className="text-muted-foreground mb-6">
-              O PcIdeal utiliza um algoritmo avançado que analisa milhares de
-              combinações de componentes para encontrar a configuração ideal
-              para você. Nosso processo é simples e direto:
-            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+              <div className="flex flex-col items-center text-center group">
+                <div className="bg-primary/10 w-20 h-20 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 relative">
+                  <MonitorPlay className="h-10 w-10 text-primary" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Análise de Objetivo</h3>
+                <p className="text-muted-foreground text-lg leading-relaxed max-w-sm">
+                  Você nos diz o que quer fazer: jogar, editar vídeos ou apenas
+                  trabalhar. Diz quanto quer gastar. Nós fazemos o resto.
+                </p>
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-              <Card>
-                <CardHeader className="pb-2">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                    <Cpu className="h-6 w-6 text-primary" />
-                  </div>
-                  <CardTitle>1. Defina seu Objetivo</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    Informe para que você usará seu PC: jogos, trabalho, edição
-                    de vídeo ou uso geral. Isso nos ajuda a priorizar os
-                    componentes certos.
-                  </p>
-                </CardContent>
-              </Card>
+              <div className="flex flex-col items-center text-center group">
+                <div className="bg-primary/10 w-20 h-20 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 relative">
+                  <DollarSign className="h-10 w-10 text-primary" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4">
+                  Otimização de Orçamento
+                </h3>
+                <p className="text-muted-foreground text-lg leading-relaxed max-w-sm">
+                  O algoritmo vai em busca do melhor preço/performance, evitando
+                  gargalos que fariam você jogar dinheiro fora.
+                </p>
+              </div>
 
-              <Card>
-                <CardHeader className="pb-2">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                    <DollarSign className="h-6 w-6 text-primary" />
-                  </div>
-                  <CardTitle>2. Defina seu Orçamento</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    Informe quanto você pode investir. Nosso sistema trabalha
-                    dentro desse valor, com pequenas variações para otimizar o
-                    custo-benefício.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader className="pb-2">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                    <Sparkles className="h-6 w-6 text-primary" />
-                  </div>
-                  <CardTitle>3. Receba Recomendações</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    Apresentamos três opções de configuração otimizadas para
-                    suas necessidades, com todos os componentes compatíveis
-                    entre si.
-                  </p>
-                </CardContent>
-              </Card>
+              <div className="flex flex-col items-center text-center group">
+                <div className="bg-primary/10 w-20 h-20 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 relative">
+                  <Sparkles className="h-10 w-10 text-primary" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4">A Build Perfeita</h3>
+                <p className="text-muted-foreground text-lg leading-relaxed max-w-sm">
+                  Receba 3 opções: Econômica, Balanceada e Performance. Tudo com
+                  links diretos e garantia de compatibilidade.
+                </p>
+              </div>
             </div>
           </section>
 
-          <Separator />
+          <div className="py-12">
+            <Separator className="opacity-50" />
+          </div>
+
+          <section className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-3xl p-8 md:p-16 relative overflow-hidden">
+            <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
+            <div className="relative z-10">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                  Por que confiar na PcIdeal?
+                </h2>
+                <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                  Não somos apenas um gerador aleatório. Somos uma ferramenta de
+                  precisão para hardware.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <Card className="bg-background/50 border-primary/10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <CardContent className="pt-8 text-center">
+                    <ShieldCheck className="h-12 w-12 text-primary mx-auto mb-6" />
+                    <h3 className="font-bold text-xl mb-3">
+                      Compatibilidade 100%
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Verificamos socket, TDP, dimensões físicas e barramentos.
+                      Se está na lista, funciona junto.
+                    </p>
+                  </CardContent>
+                </Card>
+                <Card className="bg-background/50 border-primary/10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <CardContent className="pt-8 text-center">
+                    <Zap className="h-12 w-12 text-primary mx-auto mb-6" />
+                    <h3 className="font-bold text-xl mb-3">Zero Gargalo</h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Não sugerimos uma GPU topo de linha com um processador
+                      básico. O equilíbrio é a chave.
+                    </p>
+                  </CardContent>
+                </Card>
+                <Card className="bg-background/50 border-primary/10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <CardContent className="pt-8 text-center">
+                    <HardDrive className="h-12 w-12 text-primary mx-auto mb-6" />
+                    <h3 className="font-bold text-xl mb-3">Peças Modernas</h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Nossa base de dados é atualizada constantemente com os
+                      lançamentos mais recentes do mercado.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-4">O que consideramos</h2>
-            <p className="text-muted-foreground mb-6">
-              Nosso algoritmo leva em conta diversos fatores para recomendar os
-              melhores componentes:
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-              <div className="flex items-start space-x-4">
+            <h2 className="text-2xl font-bold mb-8 text-center">
+              O que analisamos em cada componente
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex items-start space-x-4 ">
                 <div className="mt-1">
                   <Check className="h-5 w-5 text-primary" />
                 </div>

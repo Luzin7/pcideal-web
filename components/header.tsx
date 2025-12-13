@@ -62,6 +62,15 @@ export default function Header() {
             >
               Como Funciona
             </Link>
+            <Link
+              href="/about"
+              className={`text-sm font-medium transition-colors hover:text-primary ${
+                isActive('/about') ? 'text-primary' : 'text-foreground/60'
+              }`}
+              aria-label="Sobre nós"
+            >
+              Sobre
+            </Link>
           </nav>
         </div>
         <div className="flex items-center gap-4">
@@ -136,8 +145,15 @@ export default function Header() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Como Funciona
-              </Link>
-            </nav>
+              </Link>              <Link
+                href="/about"
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  isActive('/about') ? 'text-primary' : 'text-foreground/60'
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Sobre
+              </Link>            </nav>
             {/* <div className="flex flex-col space-y-2">
               <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
                 <Button variant="outline" className="w-full">
