@@ -11,8 +11,13 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
+import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Progress } from '@/components/ui/progress';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import {
   Select,
@@ -42,6 +47,7 @@ import {
   ArrowLeft,
   ArrowRight,
   Check,
+  ChevronDown,
   CircuitBoard,
   Cpu,
   HardDrive,
@@ -131,63 +137,68 @@ export default function BuilderPage() {
   };
 
   return (
-    <div className="bg-muted/30">
-      <div className="container py-8">
-        <div className="mb-8">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-5 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-background to-background pointer-events-none" />
+
+      <div className="container py-12 relative z-10 max-w-4xl">
+        <div className="mb-12">
+          <div className="flex justify-between items-center relative">
+            {/* Progress Line Background */}
+            <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-muted -z-10 -translate-y-1/2" />
+
+            {/* Step 1 */}
+            <div className="flex flex-col items-center bg-background px-2">
               <div
-                className={`flex h-7 w-7 items-center justify-center rounded-full ${
-                  step >= 1 ? 'bg-primary' : 'bg-muted'
-                } text-primary-foreground`}
+                className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 ${
+                  step >= 1
+                    ? 'border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20'
+                    : 'border-muted bg-muted text-muted-foreground'
+                }`}
               >
                 1
               </div>
-              <div
-                className={`md:ml-2 text-sm font-medium ${step >= 1 ? 'text-primary' : 'text-muted-foreground'}`}
+              <span
+                className={`mt-2 text-sm font-medium transition-colors ${step >= 1 ? 'text-primary' : 'text-muted-foreground'}`}
               >
                 Objetivo
-              </div>
+              </span>
             </div>
-            <div className="flex-1 mx-4">
-              <Progress
-                value={step === 1 ? 33 : step === 2 ? 66 : 100}
-                className="h-2"
-              />
-            </div>
-            <div className="flex items-center">
+
+            {/* Step 2 */}
+            <div className="flex flex-col items-center bg-background px-2">
               <div
-                className={`flex h-7 w-7 items-center justify-center rounded-full ${
-                  step >= 2 ? 'bg-primary' : 'bg-muted'
-                } text-primary-foreground`}
+                className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 ${
+                  step >= 2
+                    ? 'border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20'
+                    : 'border-muted bg-muted text-muted-foreground'
+                }`}
               >
                 2
               </div>
-              <div
-                className={`md:ml-2 text-sm font-medium ${step >= 2 ? 'text-primary' : 'text-muted-foreground'}`}
+              <span
+                className={`mt-2 text-sm font-medium transition-colors ${step >= 2 ? 'text-primary' : 'text-muted-foreground'}`}
               >
                 Orçamento
-              </div>
+              </span>
             </div>
-            <div className="flex-1 mx-4">
-              <Progress
-                value={step === 1 ? 0 : step === 2 ? 33 : 100}
-                className="h-2"
-              />
-            </div>
-            <div className="flex items-center">
+
+            {/* Step 3 */}
+            <div className="flex flex-col items-center bg-background px-2">
               <div
-                className={`flex h-7 w-7 items-center justify-center rounded-full ${
-                  step >= 3 ? 'bg-primary' : 'bg-muted'
-                } text-primary-foreground`}
+                className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 ${
+                  step >= 3
+                    ? 'border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20'
+                    : 'border-muted bg-muted text-muted-foreground'
+                }`}
               >
                 3
               </div>
-              <div
-                className={`md:ml-2 text-sm font-medium ${step >= 3 ? 'text-primary' : 'text-muted-foreground'}`}
+              <span
+                className={`mt-2 text-sm font-medium transition-colors ${step >= 3 ? 'text-primary' : 'text-muted-foreground'}`}
               >
                 Resultado
-              </div>
+              </span>
             </div>
           </div>
         </div>
@@ -201,7 +212,7 @@ export default function BuilderPage() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <Card className="shadow-sm">
+              <Card className="bg-card/50 backdrop-blur-sm border-primary/10 shadow-xl">
                 <CardHeader>
                   <CardTitle className="text-2xl">
                     Para que você usará seu PC?
@@ -228,7 +239,7 @@ export default function BuilderPage() {
                         />
                         <Label
                           htmlFor="GAMING"
-                          className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-6 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                          className="flex flex-col items-center justify-between rounded-xl border-2 border-muted bg-card/50 p-6 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 cursor-pointer peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 peer-data-[state=checked]:shadow-md [&:has([data-state=checked])]:border-primary"
                         >
                           <MonitorPlay className="mb-3 h-8 w-8 text-primary" />
                           <div className="text-center">
@@ -248,7 +259,7 @@ export default function BuilderPage() {
                         />
                         <Label
                           htmlFor="WORK"
-                          className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-6 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                          className="flex flex-col items-center justify-between rounded-xl border-2 border-muted bg-card/50 p-6 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 cursor-pointer peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 peer-data-[state=checked]:shadow-md [&:has([data-state=checked])]:border-primary"
                         >
                           <Cpu className="mb-3 h-8 w-8 text-primary" />
                           <div className="text-center">
@@ -268,7 +279,7 @@ export default function BuilderPage() {
                         />
                         <Label
                           htmlFor="CONTENT_CREATOR"
-                          className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-6 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                          className="flex flex-col items-center justify-between rounded-xl border-2 border-muted bg-card/50 p-6 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 cursor-pointer peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 peer-data-[state=checked]:shadow-md [&:has([data-state=checked])]:border-primary"
                         >
                           <Aperture className="mb-3 h-8 w-8 text-primary" />
                           <div className="text-center">
@@ -282,66 +293,68 @@ export default function BuilderPage() {
                       </div>
                     </RadioGroup>
 
-                    <div className="space-y-4">
-                      <h3 className="text-lg font-medium">
-                        Preferências de Hardware
-                      </h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="cpu-preference">
-                            Preferência de Processador
-                          </Label>
-                          <Select
-                            value={cpuPreference}
-                            onValueChange={(value) =>
-                              setCpuPreference(value as CpuPreference)
-                            }
-                          >
-                            <SelectTrigger id="cpu-preference">
-                              <SelectValue placeholder="Selecione uma preferência" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="no-preference">
-                                Sem preferência
-                              </SelectItem>
-                              <SelectItem value="amd">Prefiro AMD</SelectItem>
-                              <SelectItem value="intel">
-                                Prefiro Intel
-                              </SelectItem>
-                            </SelectContent>
-                          </Select>
+                    <Collapsible className="space-y-4 border rounded-lg p-4">
+                      <CollapsibleTrigger className="flex w-full items-center justify-between font-medium hover:text-primary transition-colors [&[data-state=open]>svg]:rotate-180">
+                        <span>Opções Avançadas (Marcas e Preferências)</span>
+                        <ChevronDown className="h-4 w-4 transition-transform duration-200" />
+                      </CollapsibleTrigger>
+                      <CollapsibleContent className="space-y-4 pt-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="space-y-2">
+                            <Label htmlFor="cpu-preference">
+                              Preferência de Processador
+                            </Label>
+                            <Select
+                              value={cpuPreference}
+                              onValueChange={(value) =>
+                                setCpuPreference(value as CpuPreference)
+                              }
+                            >
+                              <SelectTrigger id="cpu-preference">
+                                <SelectValue placeholder="Selecione uma preferência" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="no-preference">
+                                  Sem preferência (Recomendado)
+                                </SelectItem>
+                                <SelectItem value="amd">Prefiro AMD</SelectItem>
+                                <SelectItem value="intel">
+                                  Prefiro Intel
+                                </SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="gpu-preference">
+                              Preferência de Placa de Vídeo
+                            </Label>
+                            <Select
+                              value={gpuPreference}
+                              onValueChange={(value) =>
+                                setGpuPreference(value as GpuPreference)
+                              }
+                            >
+                              <SelectTrigger id="gpu-preference">
+                                <SelectValue placeholder="Selecione uma preferência" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="no-preference">
+                                  Sem preferência (Recomendado)
+                                </SelectItem>
+                                <SelectItem value="nvidia">
+                                  Prefiro NVIDIA
+                                </SelectItem>
+                                <SelectItem value="amd">Prefiro AMD</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
                         </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="gpu-preference">
-                            Preferência de Placa de Vídeo
-                          </Label>
-                          <Select
-                            value={gpuPreference}
-                            onValueChange={(value) =>
-                              setGpuPreference(value as GpuPreference)
-                            }
-                          >
-                            <SelectTrigger id="gpu-preference">
-                              <SelectValue placeholder="Selecione uma preferência" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="no-preference">
-                                Sem preferência
-                              </SelectItem>
-                              <SelectItem value="nvidia">
-                                Prefiro NVIDIA
-                              </SelectItem>
-                              <SelectItem value="amd">Prefiro AMD</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
-                      <p className="text-xs text-muted-foreground">
-                        Isso nos ajuda a personalizar as recomendações de acordo
-                        com suas preferências, mas sempre priorizaremos
-                        desempenho e custo-benefício.
-                      </p>
-                    </div>
+                        <p className="text-xs text-muted-foreground">
+                          *Deixe em "Sem preferência" para que nosso sistema
+                          encontre o melhor custo-benefício do mercado.
+                        </p>
+                      </CollapsibleContent>
+                    </Collapsible>
                   </div>
                 </CardContent>
                 <CardFooter className="flex justify-end">
@@ -365,7 +378,7 @@ export default function BuilderPage() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <Card className="shadow-sm">
+              <Card className="bg-card/50 backdrop-blur-sm border-primary/10 shadow-xl">
                 <CardHeader>
                   <CardTitle className="text-2xl">
                     Qual é o seu orçamento?
@@ -376,25 +389,45 @@ export default function BuilderPage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-8">
-                  <div className="space-y-4">
-                    <div className="flex justify-between">
-                      <Label htmlFor="budget">Orçamento (R$)</Label>
-                      <span className="font-medium text-primary">
-                        R$ {budget.toLocaleString('pt-BR')}
-                      </span>
-                    </div>
-                    <Slider
-                      id="budget"
-                      min={2000}
-                      max={15000}
-                      step={500}
-                      value={[budget]}
-                      onValueChange={(value) => setBudget(value[0])}
-                      className="py-4"
-                    />
-                    <div className="flex justify-between text-sm text-muted-foreground">
-                      <span>R$ 2.000</span>
-                      <span>R$ 15.000</span>
+                  <div className="space-y-6">
+                    <div className="flex flex-col gap-4">
+                      <Label htmlFor="budget" className="text-lg font-semibold">
+                        Qual é o seu limite de investimento?
+                      </Label>
+
+                      <div className="flex items-center gap-4">
+                        <div className="flex-1">
+                          <Slider
+                            id="budget"
+                            min={2000}
+                            max={15000}
+                            step={100}
+                            value={[budget]}
+                            onValueChange={(value) => setBudget(value[0])}
+                            className="py-4"
+                          />
+                        </div>
+                        <div className="w-32">
+                          <div className="relative">
+                            <span className="absolute left-3 top-2.5 text-muted-foreground">
+                              R$
+                            </span>
+                            <Input
+                              type="number"
+                              value={budget}
+                              onChange={(e) =>
+                                setBudget(Number(e.target.value))
+                              }
+                              className="pl-9 font-bold text-lg"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-between text-sm text-muted-foreground">
+                        <span>R$ 2.000</span>
+                        <span>R$ 15.000</span>
+                      </div>
                     </div>
                   </div>
 
@@ -445,7 +478,7 @@ export default function BuilderPage() {
                         <X className="h-16 w-16 text-background-foreground" />
                       </div>
                       <h3 className="text-2xl font-bold mb-2 text-primary">
-                        Não encontramos uma build ideal 😕
+                        Não encontramos uma build ideal
                       </h3>
                       <p className="text-muted-foreground text-center mb-6 max-w-md">
                         Você atingiu o limite de requisições por hora ou
@@ -478,17 +511,23 @@ export default function BuilderPage() {
                         const build = buildComplete.find(
                           (b) => b.build_type.toLowerCase() === type,
                         );
+                        const isBalanced = type === 'balanced';
 
                         return (
                           <Card
                             key={index}
-                            className={`cursor-pointer transition-all duration-300 ${
+                            className={`cursor-pointer transition-all duration-300 relative ${
                               selectedBuild === index
                                 ? 'card-highlight'
                                 : 'hover:border-primary/30 hover:shadow-sm'
-                            }`}
+                            } ${isBalanced && selectedBuild !== index ? 'border-primary/40' : ''}`}
                             onClick={() => build && setSelectedBuild(index)}
                           >
+                            {isBalanced && (
+                              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full shadow-sm z-10">
+                                RECOMENDADO
+                              </div>
+                            )}
                             <CardHeader>
                               <CardTitle>
                                 {typeMapper[type as BuildType]}
@@ -497,8 +536,8 @@ export default function BuilderPage() {
                                 {index === 0
                                   ? 'Melhor custo-benefício'
                                   : index === 1
-                                    ? 'Recomendado'
-                                    : 'Mais desempenho'}
+                                    ? 'Equilíbrio ideal'
+                                    : 'Máximo desempenho'}
                               </CardDescription>
                             </CardHeader>
                             {build ? (
