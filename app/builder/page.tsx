@@ -399,7 +399,7 @@ export default function BuilderPage() {
                         <div className="flex-1">
                           <Slider
                             id="budget"
-                            min={2000}
+                            min={2500}
                             max={15000}
                             step={100}
                             value={[budget]}
@@ -437,11 +437,11 @@ export default function BuilderPage() {
                       Variação de Orçamento
                     </h3>
                     <p className="text-sm text-muted-foreground mb-4">
-                      Permitimos uma variação de até 10% no orçamento para
+                      Permitimos uma variação de até 15% no orçamento para
                       otimizar o custo-benefício das peças. Isso significa que
                       podemos sugerir configurações entre R${' '}
-                      {Math.floor(budget * 0.9).toLocaleString('pt-BR')} e R${' '}
-                      {Math.ceil(budget * 1.1).toLocaleString('pt-BR')}.
+                      {Math.floor(budget * 0.85).toLocaleString('pt-BR')} e R${' '}
+                      {Math.ceil(budget * 1.15).toLocaleString('pt-BR')}.
                     </p>
                   </div>
                 </CardContent>
