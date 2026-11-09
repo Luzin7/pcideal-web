@@ -1,44 +1,35 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import { Cpu, DollarSign, Sparkles } from 'lucide-react';
 
 export default function HowItWorks() {
   const steps = [
     {
       icon: <Cpu className="h-8 w-8" />,
-      title: 'Defina seu Objetivo',
+      title: 'Diga para que vai usar',
       description:
-        'Escolha para que você usará seu PC: jogos, trabalho, edição de vídeo ou uso geral.',
+        'Jogos, trabalho, estudos ou edição de vídeo. Sem termo técnico.',
     },
     {
       icon: <DollarSign className="h-8 w-8" />,
-      title: 'Defina seu Orçamento',
-      description:
-        'Informe quanto você pode investir e deixe nosso algoritmo trabalhar para você.',
+      title: 'Diga quanto pode gastar',
+      description: 'Você define o limite. A build é montada para caber nele.',
     },
     {
       icon: <Sparkles className="h-8 w-8" />,
-      title: 'Receba Recomendações',
+      title: 'Escolha entre 3 builds',
       description:
-        'Veja as melhores configurações compatíveis e escolha a que mais gostar.',
+        'Econômica, balanceada e performance. Compare peça por peça e siga para a compra.',
     },
   ];
 
   return (
     <div className="mx-auto max-w-6xl py-12">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3 relative">
-        {/* Connecting line for desktop */}
         <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-transparent via-border to-transparent -z-10" />
-        
+
         {steps.map((step, index) => (
-          <motion.div
+          <div
             key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
-            viewport={{ once: true }}
-            className="flex flex-col items-center text-center space-y-6 p-6 rounded-2xl bg-background/50 backdrop-blur-sm border border-transparent hover:border-primary/10 transition-all duration-300"
+            className="group flex flex-col items-center text-center space-y-6 p-6 rounded-2xl bg-background/50 backdrop-blur-sm border border-transparent hover:border-primary/10 transition-all duration-300"
           >
             <div className="relative">
               <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-primary/5 text-primary shadow-inner ring-1 ring-inset ring-primary/10 group-hover:bg-primary/10 transition-colors">
@@ -54,7 +45,7 @@ export default function HowItWorks() {
                 {step.description}
               </p>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 
@@ -62,21 +53,27 @@ export default function HowItWorks() {
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
           <div className="flex flex-col items-center text-center space-y-2">
-            <div className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight">100%</div>
+            <div className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight">
+              3
+            </div>
             <p className="text-muted-foreground font-medium">
-              Compatibilidade garantida
+              opções para comparar
             </p>
           </div>
           <div className="flex flex-col items-center text-center space-y-2">
-            <div className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight">3k+</div>
+            <div className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight">
+              2 min
+            </div>
             <p className="text-muted-foreground font-medium">
-              Componentes catalogados
+              para ver sua build
             </p>
           </div>
           <div className="flex flex-col items-center text-center space-y-2">
-            <div className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight">2 min</div>
+            <div className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight">
+              KaBuM
+            </div>
             <p className="text-muted-foreground font-medium">
-              Para gerar sua build
+              preço no dia da consulta
             </p>
           </div>
         </div>

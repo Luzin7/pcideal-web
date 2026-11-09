@@ -171,11 +171,12 @@ export default function BuilderPage() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-background to-background pointer-events-none" />
 
       <div className="container py-12 relative z-10 max-w-4xl">
+        <h1 className="sr-only">Montar meu PC</h1>
         <div className="mb-12">
           <div className="flex justify-between items-center relative">
-            <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-muted -z-10 -translate-y-1/2" />
+            <div className="absolute left-0 right-0 top-5 h-0.5 bg-muted -z-10" />
 
-            <div className="flex flex-col items-center bg-background px-2">
+            <div className="flex flex-col items-center px-2">
               <div
                 className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 ${
                   step >= 1
@@ -188,11 +189,11 @@ export default function BuilderPage() {
               <span
                 className={`mt-2 text-sm font-medium transition-colors ${step >= 1 ? 'text-primary' : 'text-muted-foreground'}`}
               >
-                Objetivo
+                Para que vai usar?
               </span>
             </div>
 
-            <div className="flex flex-col items-center bg-background px-2">
+            <div className="flex flex-col items-center px-2">
               <div
                 className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 ${
                   step >= 2
@@ -205,11 +206,11 @@ export default function BuilderPage() {
               <span
                 className={`mt-2 text-sm font-medium transition-colors ${step >= 2 ? 'text-primary' : 'text-muted-foreground'}`}
               >
-                Orçamento
+                Quanto pode gastar?
               </span>
             </div>
 
-            <div className="flex flex-col items-center bg-background px-2">
+            <div className="flex flex-col items-center px-2">
               <div
                 className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 ${
                   step >= 3
@@ -222,7 +223,7 @@ export default function BuilderPage() {
               <span
                 className={`mt-2 text-sm font-medium transition-colors ${step >= 3 ? 'text-primary' : 'text-muted-foreground'}`}
               >
-                Resultado
+                Sua build
               </span>
             </div>
           </div>
@@ -240,11 +241,10 @@ export default function BuilderPage() {
               <Card className="bg-card/50 backdrop-blur-sm border-primary/10 shadow-xl">
                 <CardHeader>
                   <CardTitle className="text-2xl">
-                    Para que você usará seu PC?
+                    Para que vai usar o PC?
                   </CardTitle>
                   <CardDescription>
-                    Escolha o objetivo principal do seu computador para
-                    otimizarmos os componentes.
+                    Escolha o uso principal. Isso muda a prioridade das peças.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -270,8 +270,7 @@ export default function BuilderPage() {
                           <div className="text-center">
                             <h3 className="font-medium">Jogos</h3>
                             <p className="text-sm text-muted-foreground">
-                              Otimizado para jogos modernos com foco em altas
-                              taxas de quadros
+                              Para jogar com boa qualidade e sem travamentos
                             </p>
                           </div>
                         </Label>
@@ -290,8 +289,8 @@ export default function BuilderPage() {
                           <div className="text-center">
                             <h3 className="font-medium">Trabalho</h3>
                             <p className="text-sm text-muted-foreground">
-                              Para produtividade, multitarefas e aplicativos de
-                              escritório
+                              Para estudar, trabalhar e usar vários programas ao
+                              mesmo tempo
                             </p>
                           </div>
                         </Label>
@@ -310,8 +309,7 @@ export default function BuilderPage() {
                           <div className="text-center">
                             <h3 className="font-medium">Criação de Conteúdo</h3>
                             <p className="text-sm text-muted-foreground">
-                              Para edição de vídeo, produção musical, design
-                              gráfico, modelagem 3D
+                              Para editar vídeo, música, design ou modelagem 3D
                             </p>
                           </div>
                         </Label>
@@ -320,7 +318,7 @@ export default function BuilderPage() {
 
                     <Collapsible className="space-y-4 border rounded-lg p-4">
                       <CollapsibleTrigger className="flex w-full items-center justify-between font-medium hover:text-primary transition-colors [&[data-state=open]>svg]:rotate-180">
-                        <span>Opções Avançadas (Marcas e Preferências)</span>
+                        <span>Opções avançadas (marcas)</span>
                         <ChevronDown className="h-4 w-4 transition-transform duration-200" />
                       </CollapsibleTrigger>
                       <CollapsibleContent className="space-y-4 pt-4">
@@ -375,8 +373,8 @@ export default function BuilderPage() {
                           </div>
                         </div>
                         <p className="text-xs text-muted-foreground">
-                          *Deixe em "Sem preferência" para que nosso sistema
-                          encontre o melhor custo-benefício do mercado.
+                          Se você não tem preferência, deixe em "Sem
+                          preferência": a gente busca o melhor custo-benefício.
                         </p>
                       </CollapsibleContent>
                     </Collapsible>
@@ -387,7 +385,7 @@ export default function BuilderPage() {
                     onClick={handleNextStep}
                     className="bg-primary hover:bg-primary/90"
                   >
-                    Próximo
+                    Continuar
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </CardFooter>
@@ -406,18 +404,17 @@ export default function BuilderPage() {
               <Card className="bg-card/50 backdrop-blur-sm border-primary/10 shadow-xl">
                 <CardHeader>
                   <CardTitle className="text-2xl">
-                    Qual é o seu orçamento?
+                    Quanto você pode gastar?
                   </CardTitle>
                   <CardDescription>
-                    Defina quanto você deseja investir no seu PC. Podemos
-                    sugerir pequenas variações para otimizar o custo-benefício.
+                    Defina o limite. A build é montada para caber nele.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-8">
                   <div className="space-y-6">
                     <div className="flex flex-col gap-4">
                       <Label htmlFor="budget" className="text-lg font-semibold">
-                        Qual é o seu limite de investimento?
+                        Seu limite
                       </Label>
 
                       <div className="flex items-center gap-4">
@@ -460,12 +457,11 @@ export default function BuilderPage() {
                   <div className="rounded-lg border p-4 bg-muted/20">
                     <h3 className="font-medium mb-2 flex items-center">
                       <Info className="h-4 w-4 mr-2 text-primary" />
-                      Variação de Orçamento
+                      Variação de orçamento
                     </h3>
                     <p className="text-sm text-muted-foreground mb-4">
-                      Permitimos uma variação de até 15% no orçamento para
-                      otimizar o custo-benefício das peças. Isso significa que
-                      podemos sugerir configurações entre R${' '}
+                      Podemos variar até 15% para encaixar as melhores peças.
+                      Nesse caso, a build fica entre R${' '}
                       {Math.floor(budget * 0.85).toLocaleString('pt-BR')} e R${' '}
                       {Math.ceil(budget * 1.15).toLocaleString('pt-BR')}.
                     </p>
@@ -480,7 +476,7 @@ export default function BuilderPage() {
                     onClick={handleNextStep}
                     className="bg-primary hover:bg-primary/90"
                   >
-                    Gerar PC Ideal
+                    Gerar minha build
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </CardFooter>
@@ -504,15 +500,12 @@ export default function BuilderPage() {
                         <X className="h-16 w-16 text-muted-foreground" />
                       </div>
                       <h3 className="text-2xl font-bold mb-2 text-primary">
-                        Não encontramos uma build ideal
+                        Não deu para montar sua build
                       </h3>
                       <p className="text-muted-foreground text-center mb-6 max-w-md">
-                        Você atingiu o limite de requisições por hora ou
-                        infelizmente, não conseguimos montar uma configuração
-                        que atenda ao seu orçamento e preferências no momento.
-                        <br />
-                        Tente ajustar o orçamento, remover preferências ou
-                        aguarde novas recomendações em breve!
+                        Você pode ter atingido o limite de consultas por hora,
+                        ou não temos peças que caibam nesse orçamento agora.
+                        Tente ajustar o valor ou as preferências.
                       </p>
                       <Button
                         onClick={() => {
@@ -522,7 +515,7 @@ export default function BuilderPage() {
                         className="mt-2"
                       >
                         <ArrowLeft className="mr-2 h-4 w-4" />
-                        Ajustar Orçamento/Preferências
+                        Ajustar orçamento
                       </Button>
                     </CardContent>
                   </Card>
@@ -560,10 +553,10 @@ export default function BuilderPage() {
                               </CardTitle>
                               <CardDescription>
                                 {index === 0
-                                  ? 'Melhor custo-benefício'
+                                  ? 'A mais barata das três'
                                   : index === 1
-                                    ? 'Equilíbrio ideal'
-                                    : 'Máximo desempenho'}
+                                    ? 'Meio-termo entre preço e desempenho'
+                                    : 'A mais forte das três'}
                               </CardDescription>
                             </CardHeader>
                             {build ? (
@@ -630,10 +623,8 @@ export default function BuilderPage() {
                             ) : (
                               <CardContent>
                                 <div className="text-center text-muted-foreground">
-                                  Ainda não temos uma build ideal para esta
-                                  categoria, mas estamos trabalhando para
-                                  expandir nossas recomendações. Em breve, mais
-                                  opções estarão disponíveis.
+                                  Não encontramos uma build para essa opção
+                                  agora. Tente ajustar o orçamento.
                                 </div>
                               </CardContent>
                             )}
@@ -650,7 +641,7 @@ export default function BuilderPage() {
                           <div className="flex justify-between items-center">
                             <div>
                               <CardTitle className="text-2xl">
-                                Seu PC Ideal -{' '}
+                                Sua build -{' '}
                                 {
                                   typeMapper[
                                     buildComplete[
@@ -660,7 +651,7 @@ export default function BuilderPage() {
                                 }
                               </CardTitle>
                               <CardDescription>
-                                Configuração otimizada para{' '}
+                                Build para{' '}
                                 {usageType === 'GAMING'
                                   ? 'jogos'
                                   : usageType === 'WORK'
@@ -669,7 +660,7 @@ export default function BuilderPage() {
                               </CardDescription>
                             </div>
                             <Badge className="bg-primary hover:bg-primary/90">
-                              Excelente custo-benefício
+                              Peças conferidas
                             </Badge>
                           </div>
                         </CardHeader>
@@ -709,7 +700,7 @@ export default function BuilderPage() {
                         <CardFooter className="flex justify-between">
                           <Button variant="outline" onClick={handlePrevStep}>
                             <ArrowLeft className="mr-2 h-4 w-4" />
-                            Ajustar Orçamento
+                            Ajustar orçamento
                           </Button>
                         </CardFooter>
                       </Card>
@@ -721,17 +712,13 @@ export default function BuilderPage() {
                           Verifique os dados
                         </h3>
                         <p className="text-sm text-muted-foreground mb-4">
-                          Apesar de buscar trazer os melhores resultados, o
-                          PcIdeal pode apresentar imprecisões. Valide
-                          informações importantes antes de usá-las.
+                          Confira os dados antes de comprar. Preços e links vêm
+                          da KaBuM e podem mudar na loja.
                         </p>
                       </div>
                       <Card className="shadow-sm">
                         <CardHeader>
                           <CardTitle>Resumo</CardTitle>
-                          <CardDescription>
-                            {buildComplete[selectedBuild].description}
-                          </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
                           <div className="space-y-2">
@@ -749,7 +736,7 @@ export default function BuilderPage() {
                             </div>
                             <div className="flex justify-between">
                               <span className="text-muted-foreground">
-                                Preferência CPU
+                                Processador
                               </span>
                               <span className="font-medium">
                                 {cpuPreference === 'no-preference'
@@ -761,7 +748,7 @@ export default function BuilderPage() {
                             </div>
                             <div className="flex justify-between">
                               <span className="text-muted-foreground">
-                                Preferência GPU
+                                Placa de vídeo
                               </span>
                               <span className="font-medium">
                                 {gpuPreference === 'no-preference'
@@ -841,11 +828,6 @@ export default function BuilderPage() {
                           </div>
                           <Separator />
                         </CardContent>
-                        <CardFooter>
-                          <CardDescription>
-                            {buildComplete[selectedBuild].summary}
-                          </CardDescription>
-                        </CardFooter>
                       </Card>
                     </div>
                   </div>
