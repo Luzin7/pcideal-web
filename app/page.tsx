@@ -22,11 +22,12 @@ export default function Home() {
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />
         <div className="container px-4 md:px-6 relative z-10">
           <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
-            <div className="inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium text-primary bg-primary/10 backdrop-blur-sm">
-              <Check className="mr-1 h-3 w-3" /> Feito para o seu primeiro PC
+            <div className="inline-flex items-center whitespace-nowrap rounded-full border px-3 py-1 text-sm font-medium text-primary bg-primary/10 backdrop-blur-sm">
+              <Check className="mr-1 h-3 w-3" /> Para quem não quer errar na
+              compra
             </div>
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-foreground">
-              Seu primeiro PC, <br />
+              Monte seu PC <br />
               <span className="text-primary">sem medo de errar na peça.</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">

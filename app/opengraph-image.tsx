@@ -1,7 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-export const alt =
-  'PcIdeal: seu primeiro PC, sem medo de comprar a peça errada';
+export const alt = 'PcIdeal: monte seu PC sem medo de comprar a peça errada';
 export const size = {
   width: 1200,
   height: 630,
@@ -59,7 +58,7 @@ export default function OpengraphImage() {
               letterSpacing: '-2px',
             }}
           >
-            Seu primeiro PC, sem medo de comprar a peça errada.
+            Monte seu PC sem medo de comprar a peça errada.
           </div>
           <div style={{ fontSize: '30px', color: '#EDE9FE' }}>
             Peças que encaixam, dentro do seu orçamento.

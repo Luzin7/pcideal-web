@@ -23,14 +23,14 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL ?? 'https://pcideal.com.br',
   ),
   title: {
-    default: 'PcIdeal - Monte seu primeiro PC sem errar na peça',
+    default: 'PcIdeal - Monte seu PC sem errar na peça',
     template: '%s | PcIdeal',
   },
   description:
     'Diga para que vai usar e quanto pode gastar. O PcIdeal mostra 3 builds com peças que encaixam e preços na KaBuM. Sem cadastro.',
   keywords: [
-    'montar primeiro pc',
-    'pc para iniciante',
+    'montar pc sem errar',
+    'pc sem entender de hardware',
     'montar pc',
     'computador gamer',
     'build pc',
@@ -46,13 +46,13 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     url: '/',
     siteName: 'PcIdeal',
-    title: 'PcIdeal - Monte seu primeiro PC sem errar na peça',
+    title: 'PcIdeal - Monte seu PC sem errar na peça',
     description:
       'Diga para que vai usar e quanto pode gastar. 3 builds com peças que encaixam e preços na KaBuM. Sem cadastro.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PcIdeal - Monte seu primeiro PC sem errar na peça',
+    title: 'PcIdeal - Monte seu PC sem errar na peça',
     description:
       'Diga para que vai usar e quanto pode gastar. 3 builds com peças que encaixam e preços na KaBuM.',
   },

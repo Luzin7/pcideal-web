@@ -20,7 +20,7 @@ export default function HowItWorksPage() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-20 space-y-6">
           <div className="inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium text-primary bg-primary/10">
-            Feito para quem está começando
+            Para quem não quer errar na compra
           </div>
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
             Como funciona o <span className="text-primary">PcIdeal</span>

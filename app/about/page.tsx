@@ -6,7 +6,7 @@ import Link from 'next/link';
 export const metadata = {
   title: 'Sobre Nós | PcIdeal',
   description:
-    'O PcIdeal ajuda quem vai montar o primeiro PC a escolher peças que encaixam e cabem no orçamento.',
+    'O PcIdeal ajuda quem não entende de hardware a escolher peças que encaixam e cabem no orçamento.',
 };
 
 export default function AboutPage() {
@@ -18,9 +18,9 @@ export default function AboutPage() {
           <span className="text-primary">ser um chute caro.</span>
         </h1>
         <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-          O PcIdeal existe para quem vai montar o primeiro computador e tem medo
-          de gastar errado. Você diz o uso e o orçamento; a gente mostra peças
-          que encaixam.
+          O PcIdeal existe para quem não entende de hardware e tem medo de
+          gastar errado. Você diz o uso e o orçamento; a gente mostra peças que
+          encaixam.
         </p>
       </div>
 
@@ -33,8 +33,8 @@ export default function AboutPage() {
             O fim da "Taxa de Leigo"
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
-            Quem nunca montou um PC costuma pagar mais do que precisa: peça que
-            não encaixa, peça que não muda nada no uso, ou as duas coisas.
+            Quem não entende de hardware costuma pagar mais do que precisa: peça
+            que não encaixa, peça que não muda nada no uso, ou as duas coisas.
           </p>
           <p className="text-muted-foreground text-lg leading-relaxed">
             A gente confere o conjunto antes de sugerir: tudo combina, cabe no
@@ -94,7 +94,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white/20 to-transparent opacity-50" />
         <div className="relative z-10 max-w-2xl mx-auto space-y-6">
           <h2 className="text-3xl md:text-4xl font-bold">
-            Pronto para montar seu primeiro PC?
+            Pronto para montar seu PC sem errar?
           </h2>
           <p className="text-primary-foreground/90 text-lg">
             Sem cadastro. Em 2 minutos você vê sua build com preços na KaBuM.
@@ -105,7 +105,7 @@ export default function AboutPage() {
               variant="secondary"
               className="text-primary font-bold text-lg h-12 px-8 shadow-lg"
             >
-              Começar Agora
+              Começar agora
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>
