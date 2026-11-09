@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: '%s | PcIdeal',
   },
   description:
-    'Diga para que vai usar e quanto pode gastar. O PcIdeal mostra 3 builds com peças que encaixam e preços atualizados na loja. Sem cadastro.',
+    'Diga para que vai usar e quanto pode gastar. O PcIdeal mostra 3 builds com peças que encaixam e preços atualizados nas lojas. Sem cadastro.',
   keywords: [
     'montar pc sem errar',
     'pc sem entender de hardware',
@@ -49,13 +49,13 @@ export const metadata: Metadata = {
     siteName: 'PcIdeal',
     title: 'PcIdeal - Monte seu PC sem errar na peça',
     description:
-      'Diga para que vai usar e quanto pode gastar. 3 builds com peças que encaixam e preços atualizados na loja. Sem cadastro.',
+      'Diga para que vai usar e quanto pode gastar. 3 builds com peças que encaixam e preços atualizados nas lojas. Sem cadastro.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'PcIdeal - Monte seu PC sem errar na peça',
     description:
-      'Diga para que vai usar e quanto pode gastar. 3 builds com peças que encaixam e preços atualizados na loja.',
+      'Diga para que vai usar e quanto pode gastar. 3 builds com peças que encaixam e preços atualizados nas lojas.',
   },
   robots: {
     index: true,

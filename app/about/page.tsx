@@ -49,7 +49,7 @@ export default function AboutPage() {
               Sem cadastro, sem pressão
             </h3>
             <p className="text-sm text-muted-foreground">
-              Você vê as peças, os preços e os links da loja. A compra é sua.
+              Você vê as peças, os preços e os links das lojas. A compra é sua.
             </p>
           </div>
         </div>

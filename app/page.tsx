@@ -32,8 +32,8 @@ export default function Home() {
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Diga para que vai usar e quanto pode gastar. Em 2 minutos você
-              recebe 3 opções que encaixam entre si, com preço atualizado na
-              loja. Sem cadastro.
+              recebe 3 opções que encaixam entre si, com preços atualizados nas
+              lojas. Sem cadastro.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
               <Link href={builder} className="w-full sm:w-auto">

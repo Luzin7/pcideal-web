@@ -35,7 +35,7 @@ export function BuilderLoadingSkeleton() {
               style={{ animationDelay: '0.6s' }}
             />
             <span className="text-sm text-muted-foreground">
-              Conferindo preços na loja...
+              Conferindo preços nas lojas...
             </span>
           </div>
         </div>

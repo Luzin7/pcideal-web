@@ -176,9 +176,9 @@ export default function HowItWorksPage() {
                   <Check className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-medium">Preço na loja</h3>
+                  <h3 className="font-medium">Preços das lojas</h3>
                   <p className="text-sm text-muted-foreground">
-                    Mostramos o valor da loja no dia da consulta.
+                    Mostramos os valores das lojas no dia da consulta.
                   </p>
                 </div>
               </div>
@@ -288,7 +288,7 @@ export default function HowItWorksPage() {
               <div>
                 <h3 className="font-bold">Como vocês ganham dinheiro?</h3>
                 <p className="text-muted-foreground">
-                  Quando você compra por um dos nossos links, a loja paga uma
+                  Quando você compra por um dos nossos links, as lojas pagam uma
                   comissão pra gente. O preço pra você é o mesmo.
                 </p>
               </div>
