@@ -75,7 +75,7 @@ export default function OpengraphImage() {
         >
           <span>3 builds</span>
           <span>·</span>
-          <span>preços na KaBuM</span>
+          <span>preços atualizados</span>
           <span>·</span>
           <span>sem cadastro</span>
         </div>

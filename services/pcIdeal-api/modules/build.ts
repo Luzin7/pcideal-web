@@ -9,14 +9,14 @@ type CreateBuildDataType = {
   usageType: UsageType;
   cpuPreference: CpuPreference;
   gpuPreference: GpuPreference;
-  budget: number;
+  budgetCents: number;
 };
 
 export async function createBuild({
   usageType,
   cpuPreference,
   gpuPreference,
-  budget,
+  budgetCents,
 }: CreateBuildDataType) {
   return axiosRequest<RecommendedBuilds>({
     method: 'POST',
@@ -25,7 +25,7 @@ export async function createBuild({
       usage_type: usageType,
       cpu_preference: cpuPreference,
       gpu_preference: gpuPreference,
-      budget,
+      budget_cents: budgetCents,
     },
   });
 }

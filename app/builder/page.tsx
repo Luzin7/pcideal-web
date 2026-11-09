@@ -127,7 +127,7 @@ export default function BuilderPage() {
   ): Promise<RecommendationBuild[] | null> => {
     setLoading(true);
     const result = await createBuild({
-      budget: budgetValue,
+      budgetCents: Math.round(budgetValue * 100),
       cpuPreference,
       gpuPreference,
       usageType,
@@ -570,9 +570,9 @@ export default function BuilderPage() {
                                 <CardContent>
                                   <div className="text-2xl font-bold mb-4">
                                     R${' '}
-                                    {(build.build_value / 100).toLocaleString(
-                                      'pt-BR',
-                                    )}
+                                    {convertSmallestUnitToCurrency(
+                                      build.build_value_cents,
+                                    ).toLocaleString('pt-BR')}
                                   </div>
                                   <div className="space-y-2">
                                     {Object.entries(build.parts)
@@ -719,7 +719,7 @@ export default function BuilderPage() {
                         </h3>
                         <p className="text-sm text-muted-foreground mb-4">
                           Confira os dados antes de comprar. Preços e links vêm
-                          da KaBuM e podem mudar na loja.
+                          das lojas e podem mudar a qualquer momento.
                         </p>
                       </div>
                       <Card className="shadow-sm">
@@ -765,29 +765,33 @@ export default function BuilderPage() {
                             <SummaryRow
                               label="Total"
                               value={`R$ ${convertSmallestUnitToCurrency(
-                                buildComplete[selectedBuild].build_value,
+                                buildComplete[selectedBuild].build_value_cents,
                               ).toLocaleString('pt-BR')}`}
                             />
                             <SummaryRow
                               label="Diferença"
                               value={
                                 convertSmallestUnitToCurrency(
-                                  buildComplete[selectedBuild].build_value,
+                                  buildComplete[selectedBuild].build_value_cents,
                                 ) <= budget
                                   ? `- R$ ${(
                                       budget -
-                                      buildComplete[selectedBuild].build_value /
-                                        100
+                                      convertSmallestUnitToCurrency(
+                                        buildComplete[selectedBuild]
+                                          .build_value_cents,
+                                      )
                                     ).toLocaleString('pt-BR')}`
                                   : `+ R$ ${(
-                                      buildComplete[selectedBuild].build_value /
-                                        100 -
+                                      convertSmallestUnitToCurrency(
+                                        buildComplete[selectedBuild]
+                                          .build_value_cents,
+                                      ) -
                                       budget
                                     ).toLocaleString('pt-BR')}`
                               }
                               valueClassName={
                                 convertSmallestUnitToCurrency(
-                                  buildComplete[selectedBuild].build_value,
+                                  buildComplete[selectedBuild].build_value_cents,
                                 ) <= budget
                                   ? 'text-green-700 dark:text-green-400'
                                   : 'text-amber-700 dark:text-amber-400'
@@ -877,7 +881,7 @@ function ComponentItem({
             target="_blank"
             rel="noopener noreferrer"
           >
-            Comprar na KaBuM
+            Comprar
           </a>
         </Button>
       </div>
