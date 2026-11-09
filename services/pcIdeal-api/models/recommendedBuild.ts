@@ -51,10 +51,8 @@ export type BuildParts = {
 
 export type RecommendationBuild = {
   build_type: string;
-  budget: number;
-  build_value: number;
-  description: string;
-  summary: string;
+  budget_cents: number;
+  build_value_cents: number;
   parts: BuildParts;
 };
 
