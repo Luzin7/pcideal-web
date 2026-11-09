@@ -29,7 +29,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { Slider } from '@/components/ui/slider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { convertSmallestUnitToCurrency } from '@/lib/utils';
+import { cn, convertSmallestUnitToCurrency } from '@/lib/utils';
 import {
   BuildParts,
   Part,
@@ -172,7 +172,7 @@ export default function BuilderPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
+    <div className="min-h-screen bg-background relative">
       <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-5 pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-background to-background pointer-events-none" />
 
@@ -180,14 +180,14 @@ export default function BuilderPage() {
         <h1 className="sr-only">Montar meu PC</h1>
         <div className="mb-12">
           <div className="flex justify-between items-center relative">
-            <div className="absolute left-0 right-0 top-5 h-0.5 bg-muted -z-10" />
+            <div className="absolute left-0 right-0 top-5 h-0.5 bg-border -z-10" />
 
             <div className="flex flex-col items-center px-2">
               <div
                 className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 ${
                   step >= 1
                     ? 'border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20'
-                    : 'border-muted bg-muted text-muted-foreground'
+                    : 'border-border bg-card text-muted-foreground'
                 }`}
               >
                 1
@@ -204,7 +204,7 @@ export default function BuilderPage() {
                 className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 ${
                   step >= 2
                     ? 'border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20'
-                    : 'border-muted bg-muted text-muted-foreground'
+                    : 'border-border bg-card text-muted-foreground'
                 }`}
               >
                 2
@@ -221,7 +221,7 @@ export default function BuilderPage() {
                 className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 ${
                   step >= 3
                     ? 'border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20'
-                    : 'border-muted bg-muted text-muted-foreground'
+                    : 'border-border bg-card text-muted-foreground'
                 }`}
               >
                 3
@@ -644,7 +644,7 @@ export default function BuilderPage() {
                     <div className="lg:col-span-2">
                       <Card className="shadow-sm">
                         <CardHeader>
-                          <div className="flex justify-between items-center">
+                          <div className="flex flex-wrap items-center justify-between gap-2">
                             <div>
                               <CardTitle className="text-2xl">
                                 Sua build -{' '}
@@ -728,75 +728,50 @@ export default function BuilderPage() {
                         </CardHeader>
                         <CardContent className="space-y-4">
                           <div className="space-y-2">
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">
-                                Objetivo
-                              </span>
-                              <span className="font-medium">
-                                {usageType === 'GAMING'
+                            <SummaryRow
+                              label="Objetivo"
+                              value={
+                                usageType === 'GAMING'
                                   ? 'Jogos'
                                   : usageType === 'WORK'
                                     ? 'Trabalho'
-                                    : 'Criação de Conteúdo'}
-                              </span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">
-                                Processador
-                              </span>
-                              <span className="font-medium">
-                                {cpuPreference === 'no-preference'
+                                    : 'Criação de Conteúdo'
+                              }
+                            />
+                            <SummaryRow
+                              label="Processador"
+                              value={
+                                cpuPreference === 'no-preference'
                                   ? 'Sem Preferência'
                                   : cpuPreference === 'AMD'
                                     ? 'AMD'
-                                    : 'Intel'}
-                              </span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">
-                                Placa de vídeo
-                              </span>
-                              <span className="font-medium">
-                                {gpuPreference === 'no-preference'
+                                    : 'Intel'
+                              }
+                            />
+                            <SummaryRow
+                              label="Placa de vídeo"
+                              value={
+                                gpuPreference === 'no-preference'
                                   ? 'Sem Preferência'
                                   : gpuPreference === 'NVIDIA'
                                     ? 'NVIDIA'
-                                    : 'AMD'}
-                              </span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">
-                                Orçamento
-                              </span>
-                              <span className="font-medium">
-                                R$ {budget.toLocaleString('pt-BR')}
-                              </span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">
-                                Total
-                              </span>
-                              <span className="font-medium">
-                                R${' '}
-                                {convertSmallestUnitToCurrency(
-                                  buildComplete[selectedBuild].build_value,
-                                ).toLocaleString('pt-BR')}
-                              </span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">
-                                Diferença
-                              </span>
-                              <span
-                                className={`font-medium ${
-                                  convertSmallestUnitToCurrency(
-                                    buildComplete[selectedBuild].build_value,
-                                  ) <= budget
-                                    ? 'text-green-500'
-                                    : 'text-amber-500'
-                                }`}
-                              >
-                                {convertSmallestUnitToCurrency(
+                                    : 'AMD'
+                              }
+                            />
+                            <SummaryRow
+                              label="Orçamento"
+                              value={`R$ ${budget.toLocaleString('pt-BR')}`}
+                            />
+                            <SummaryRow
+                              label="Total"
+                              value={`R$ ${convertSmallestUnitToCurrency(
+                                buildComplete[selectedBuild].build_value,
+                              ).toLocaleString('pt-BR')}`}
+                            />
+                            <SummaryRow
+                              label="Diferença"
+                              value={
+                                convertSmallestUnitToCurrency(
                                   buildComplete[selectedBuild].build_value,
                                 ) <= budget
                                   ? `- R$ ${(
@@ -808,9 +783,16 @@ export default function BuilderPage() {
                                       buildComplete[selectedBuild].build_value /
                                         100 -
                                       budget
-                                    ).toLocaleString('pt-BR')}`}
-                              </span>
-                            </div>
+                                    ).toLocaleString('pt-BR')}`
+                              }
+                              valueClassName={
+                                convertSmallestUnitToCurrency(
+                                  buildComplete[selectedBuild].build_value,
+                                ) <= budget
+                                  ? 'text-green-700 dark:text-green-400'
+                                  : 'text-amber-700 dark:text-amber-400'
+                              }
+                            />
                           </div>
                           <Separator />
                           <div>
@@ -860,27 +842,36 @@ function ComponentItem({
     ? formatPartFreshness(part.updated_at)
     : null;
   return (
-    <div className="flex items-center space-x-4 rounded-lg border p-3 transition-all hover:border-primary hover:bg-primary/5">
-      <div className="rounded-full p-2 bg-primary/10 text-primary">{icon}</div>
-      <div className="flex-1">
-        <div className="flex justify-between">
-          <p className="font-medium">{label}</p>
+    <div className="flex flex-col gap-3 rounded-lg border p-3 transition-all hover:border-primary hover:bg-primary/5 sm:flex-row sm:items-center sm:gap-4">
+      <div className="flex min-w-0 items-start gap-3 sm:flex-1">
+        <div className="shrink-0 rounded-full p-2 bg-primary/10 text-primary">
+          {icon}
         </div>
-        <p className="text-sm">
-          {part.brand.toUpperCase()} {part.model}
-        </p>
+        <div className="min-w-0">
+          <p className="font-medium">{label}</p>
+          <p className="text-sm break-words">
+            {part.brand.toUpperCase()} {part.model}
+          </p>
+        </div>
       </div>
-      <div className="text-right">
-        <p className="font-medium">
-          R${' '}
-          {convertSmallestUnitToCurrency(part.price_cents).toLocaleString(
-            'pt-BR',
+      <div className="flex flex-col gap-2 sm:shrink-0 sm:items-end sm:text-right">
+        <div>
+          <p className="font-medium">
+            R${' '}
+            {convertSmallestUnitToCurrency(part.price_cents).toLocaleString(
+              'pt-BR',
+            )}
+          </p>
+          {freshness && (
+            <p className="text-xs text-muted-foreground">{freshness}</p>
           )}
-        </p>
-        {freshness && (
-          <p className="text-xs text-muted-foreground">{freshness}</p>
-        )}
-        <Button asChild variant="outline" size="sm" className="mt-2">
+        </div>
+        <Button
+          asChild
+          variant="outline"
+          size="sm"
+          className="w-full sm:w-auto"
+        >
           <a
             href={part.affiliate_url}
             target="_blank"
@@ -890,6 +881,25 @@ function ComponentItem({
           </a>
         </Button>
       </div>
+    </div>
+  );
+}
+
+function SummaryRow({
+  label,
+  value,
+  valueClassName,
+}: {
+  label: string;
+  value: string;
+  valueClassName?: string;
+}) {
+  return (
+    <div className="flex justify-between gap-4">
+      <span className="text-muted-foreground">{label}</span>
+      <span className={cn('text-right font-medium', valueClassName)}>
+        {value}
+      </span>
     </div>
   );
 }

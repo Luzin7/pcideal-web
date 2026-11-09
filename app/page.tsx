@@ -18,7 +18,7 @@ export default function Home() {
   const { howItWorks, builder } = localRoutePaths;
   return (
     <div className="flex flex-col">
-      <section className="w-full py-20 md:py-32 lg:py-40 relative overflow-hidden">
+      <section className="w-full pt-20 pb-8 md:pt-32 md:pb-10 lg:pt-40 lg:pb-12 relative overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />
         <div className="container px-4 md:px-6 relative z-10">
           <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
