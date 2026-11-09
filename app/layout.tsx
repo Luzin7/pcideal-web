@@ -1,6 +1,7 @@
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import { ThemeProvider } from '@/components/theme-provider';
+import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
 import { Inter, Outfit } from 'next/font/google';
 import type React from 'react';
@@ -100,6 +101,7 @@ export default function RootLayout({
             <Footer />
           </div>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

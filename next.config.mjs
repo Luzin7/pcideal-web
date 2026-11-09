@@ -1,3 +1,5 @@
+import { withSentryConfig } from '@sentry/nextjs/config';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
@@ -12,7 +14,7 @@ const nextConfig = {
     minimumCacheTTL: 60,
   },
   compress: true,
-  poweredByHeader: false, 
+  poweredByHeader: false,
   generateEtags: true,
   reactStrictMode: true,
   eslint: {
@@ -57,4 +59,11 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withSentryConfig(nextConfig, {
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  tunnelRoute: '/monitoring',
+  widenClientFileUpload: true,
+  silent: true,
+});
