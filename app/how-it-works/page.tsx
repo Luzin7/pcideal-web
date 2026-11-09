@@ -20,14 +20,14 @@ export default function HowItWorksPage() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-20 space-y-6">
           <div className="inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium text-primary bg-primary/10">
-            Processo Simplificado
+            Para quem não quer errar na compra
           </div>
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
-            Como Funciona o <span className="text-primary">PcIdeal</span>
+            Como funciona o <span className="text-primary">PcIdeal</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Entenda como nossa engine transforma seu orçamento em performance
-            máxima, sem desperdícios e sem complicações.
+            Três passos, sem cadastro e sem termo técnico. Você informa o uso e
+            o orçamento; a gente monta opções que encaixam.
           </p>
         </div>
 
@@ -38,10 +38,12 @@ export default function HowItWorksPage() {
                 <div className="bg-primary/10 w-20 h-20 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 relative">
                   <MonitorPlay className="h-10 w-10 text-primary" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4">Análise de Objetivo</h3>
+                <h3 className="text-2xl font-bold mb-4">
+                  Diga para que vai usar
+                </h3>
                 <p className="text-muted-foreground text-lg leading-relaxed max-w-sm">
-                  Você nos diz o que quer fazer: jogar, editar vídeos ou apenas
-                  trabalhar. Diz quanto quer gastar. Nós fazemos o resto.
+                  Jogos, trabalho, estudos ou edição de vídeo. Você não precisa
+                  saber o nome de cada peça.
                 </p>
               </div>
 
@@ -50,11 +52,11 @@ export default function HowItWorksPage() {
                   <DollarSign className="h-10 w-10 text-primary" />
                 </div>
                 <h3 className="text-2xl font-bold mb-4">
-                  Otimização de Orçamento
+                  Diga quanto pode gastar
                 </h3>
                 <p className="text-muted-foreground text-lg leading-relaxed max-w-sm">
-                  O algoritmo vai em busca do melhor preço/performance, evitando
-                  gargalos que fariam você jogar dinheiro fora.
+                  Você define o teto. A gente escolhe as peças que cabem nele e
+                  que funcionam juntas.
                 </p>
               </div>
 
@@ -62,10 +64,10 @@ export default function HowItWorksPage() {
                 <div className="bg-primary/10 w-20 h-20 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 relative">
                   <Sparkles className="h-10 w-10 text-primary" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4">A Build Perfeita</h3>
+                <h3 className="text-2xl font-bold mb-4">Compare e escolha</h3>
                 <p className="text-muted-foreground text-lg leading-relaxed max-w-sm">
-                  Receba 3 opções: Econômica, Balanceada e Performance. Tudo com
-                  links diretos e garantia de compatibilidade.
+                  Três opções prontas: econômica, balanceada e performance. Cada
+                  peça vem com preço e link da KaBuM.
                 </p>
               </div>
             </div>
@@ -80,11 +82,11 @@ export default function HowItWorksPage() {
             <div className="relative z-10">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                  Por que confiar na PcIdeal?
+                  O que a gente confere por você
                 </h2>
                 <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                  Não somos apenas um gerador aleatório. Somos uma ferramenta de
-                  precisão para hardware.
+                  Nada de peça aleatória: cada item é checado antes de entrar na
+                  build.
                 </p>
               </div>
 
@@ -93,31 +95,33 @@ export default function HowItWorksPage() {
                   <CardContent className="pt-8 text-center">
                     <ShieldCheck className="h-12 w-12 text-primary mx-auto mb-6" />
                     <h3 className="font-bold text-xl mb-3">
-                      Compatibilidade 100%
+                      Peças que combinam
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      Verificamos socket, TDP, dimensões físicas e barramentos.
-                      Se está na lista, funciona junto.
+                      Conferimos processador, placa-mãe, memória, fonte e
+                      gabinete. O que está na lista funciona junto.
                     </p>
                   </CardContent>
                 </Card>
                 <Card className="bg-background/50 border-primary/10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                   <CardContent className="pt-8 text-center">
                     <Zap className="h-12 w-12 text-primary mx-auto mb-6" />
-                    <h3 className="font-bold text-xl mb-3">Zero Gargalo</h3>
+                    <h3 className="font-bold text-xl mb-3">
+                      Peças equilibradas
+                    </h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      Não sugerimos uma GPU topo de linha com um processador
-                      básico. O equilíbrio é a chave.
+                      Não colocamos placa de vídeo forte com processador básico.
+                      O conjunto faz sentido para o seu uso.
                     </p>
                   </CardContent>
                 </Card>
                 <Card className="bg-background/50 border-primary/10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                   <CardContent className="pt-8 text-center">
                     <HardDrive className="h-12 w-12 text-primary mx-auto mb-6" />
-                    <h3 className="font-bold text-xl mb-3">Peças Modernas</h3>
+                    <h3 className="font-bold text-xl mb-3">Preço do dia</h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      Nossa base de dados é atualizada constantemente com os
-                      lançamentos mais recentes do mercado.
+                      O valor que você vê é o da loja no dia da consulta. Sem
+                      cadastro e sem taxa nossa.
                     </p>
                   </CardContent>
                 </Card>
@@ -127,7 +131,7 @@ export default function HowItWorksPage() {
 
           <section>
             <h2 className="text-2xl font-bold mb-8 text-center">
-              O que analisamos em cada componente
+              O que a gente confere em cada peça
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex items-start space-x-4 ">
@@ -135,10 +139,10 @@ export default function HowItWorksPage() {
                   <Check className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-medium">Compatibilidade</h3>
+                  <h3 className="font-medium">Se encaixa</h3>
                   <p className="text-sm text-muted-foreground">
-                    Garantimos que todos os componentes funcionem perfeitamente
-                    juntos, sem problemas de compatibilidade.
+                    Processador, placa-mãe, memória, fonte e gabinete: tudo
+                    precisa combinar.
                   </p>
                 </div>
               </div>
@@ -148,10 +152,9 @@ export default function HowItWorksPage() {
                   <Check className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-medium">Desempenho</h3>
+                  <h3 className="font-medium">Se faz sentido para o seu uso</h3>
                   <p className="text-sm text-muted-foreground">
-                    Priorizamos componentes que oferecem o melhor desempenho
-                    para o seu caso de uso específico.
+                    A prioridade muda entre jogos, trabalho e edição de vídeo.
                   </p>
                 </div>
               </div>
@@ -161,10 +164,9 @@ export default function HowItWorksPage() {
                   <Check className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-medium">Custo-benefício</h3>
+                  <h3 className="font-medium">Se cabe no orçamento</h3>
                   <p className="text-sm text-muted-foreground">
-                    Buscamos o melhor valor pelo seu dinheiro, evitando
-                    componentes com preço inflacionado.
+                    Buscamos o conjunto que rende mais dentro do seu limite.
                   </p>
                 </div>
               </div>
@@ -174,10 +176,9 @@ export default function HowItWorksPage() {
                   <Check className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-medium">Preços atualizados</h3>
+                  <h3 className="font-medium">Preço na KaBuM</h3>
                   <p className="text-sm text-muted-foreground">
-                    Comparamos preços em tempo real nas principais lojas
-                    brasileiras para encontrar as melhores ofertas.
+                    Mostramos o valor da loja no dia da consulta.
                   </p>
                 </div>
               </div>
@@ -187,10 +188,9 @@ export default function HowItWorksPage() {
                   <Check className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-medium">Preferências de marca</h3>
+                  <h3 className="font-medium">Sua preferência de marca</h3>
                   <p className="text-sm text-muted-foreground">
-                    Respeitamos suas preferências por marcas específicas de
-                    processador ou placa de vídeo.
+                    Se você prefere AMD, Intel ou NVIDIA, a build respeita.
                   </p>
                 </div>
               </div>
@@ -202,8 +202,7 @@ export default function HowItWorksPage() {
                 <div>
                   <h3 className="font-medium">Equilíbrio</h3>
                   <p className="text-sm text-muted-foreground">
-                    Evitamos gargalos, garantindo que todos os componentes
-                    trabalhem em harmonia.
+                    Evitamos peça forte demais para o resto do conjunto.
                   </p>
                 </div>
               </div>
@@ -214,11 +213,11 @@ export default function HowItWorksPage() {
 
           <section>
             <h2 className="text-2xl font-bold mb-4">
-              Componentes que selecionamos
+              As peças que entram na build
             </h2>
             <p className="text-muted-foreground mb-6">
-              Nosso sistema seleciona todos os componentes essenciais para um PC
-              completo:
+              Toda build vem com os itens essenciais para o PC ligar e
+              funcionar:
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
@@ -226,8 +225,7 @@ export default function HowItWorksPage() {
                 <Cpu className="h-8 w-8 text-primary mb-2" />
                 <h3 className="font-medium">Processador (CPU)</h3>
                 <p className="text-sm text-muted-foreground">
-                  O cérebro do computador, responsável por processar todas as
-                  informações.
+                  Faz o trabalho pesado do dia a dia.
                 </p>
               </div>
 
@@ -235,8 +233,7 @@ export default function HowItWorksPage() {
                 <MonitorPlay className="h-8 w-8 text-primary mb-2" />
                 <h3 className="font-medium">Placa de Vídeo (GPU)</h3>
                 <p className="text-sm text-muted-foreground">
-                  Responsável pelo processamento gráfico, essencial para jogos e
-                  edição de vídeo.
+                  Cuida dos gráficos dos jogos e da edição de vídeo.
                 </p>
               </div>
 
@@ -244,8 +241,7 @@ export default function HowItWorksPage() {
                 <MemoryStick className="h-8 w-8 text-primary mb-2" />
                 <h3 className="font-medium">Memória RAM</h3>
                 <p className="text-sm text-muted-foreground">
-                  Armazenamento temporário que permite executar múltiplos
-                  programas simultaneamente.
+                  Deixa você abrir vários programas ao mesmo tempo.
                 </p>
               </div>
 
@@ -253,8 +249,7 @@ export default function HowItWorksPage() {
                 <HardDrive className="h-8 w-8 text-primary mb-2" />
                 <h3 className="font-medium">Armazenamento</h3>
                 <p className="text-sm text-muted-foreground">
-                  SSDs e HDDs para armazenar seu sistema operacional, programas
-                  e arquivos.
+                  Guarda o sistema, os programas e os arquivos.
                 </p>
               </div>
 
@@ -262,8 +257,7 @@ export default function HowItWorksPage() {
                 <Zap className="h-8 w-8 text-primary mb-2" />
                 <h3 className="font-medium">Fonte de Alimentação</h3>
                 <p className="text-sm text-muted-foreground">
-                  Fornece energia estável e suficiente para todos os componentes
-                  do sistema.
+                  Entrega energia para todas as peças.
                 </p>
               </div>
 
@@ -271,8 +265,7 @@ export default function HowItWorksPage() {
                 <HardDrive className="h-8 w-8 text-primary mb-2" />
                 <h3 className="font-medium">Placa-mãe</h3>
                 <p className="text-sm text-muted-foreground">
-                  Conecta todos os componentes e permite que se comuniquem entre
-                  si.
+                  Liga todas as peças umas às outras.
                 </p>
               </div>
             </div>
@@ -287,51 +280,34 @@ export default function HowItWorksPage() {
               <div>
                 <h3 className="font-bold">O serviço é gratuito?</h3>
                 <p className="text-muted-foreground">
-                  Sim, o PcIdeal é completamente gratuito para os usuários.
-                  Nosso modelo de negócio é baseado em comissões de afiliados
-                  quando você compra componentes através dos nossos links.
+                  Sim. Você não paga nada para usar o PcIdeal e não precisa
+                  criar conta.
                 </p>
               </div>
 
               <div>
                 <h3 className="font-bold">Como vocês ganham dinheiro?</h3>
                 <p className="text-muted-foreground">
-                  Recebemos pequenas comissões das lojas parceiras quando você
-                  compra componentes através dos nossos links. Isso não aumenta
-                  o preço que você paga e nos permite manter o serviço gratuito.
+                  Recebemos uma comissão da KaBuM quando você compra por um link
+                  nosso. O preço que você paga é o mesmo da loja.
                 </p>
               </div>
 
               <div>
                 <h3 className="font-bold">As recomendações são confiáveis?</h3>
                 <p className="text-muted-foreground">
-                  Embora o projeto esteja em fase inicial, nosso algoritmo é
-                  imparcial e prioriza sempre o melhor custo-benefício para o
-                  usuário. Não favorecemos nenhuma marca ou loja específica em
-                  nossas recomendações.
+                  A gente mostra as peças, os preços e os links para você
+                  conferir antes de comprar. A decisão de comprar é sua.
                 </p>
               </div>
 
               <div>
                 <h3 className="font-bold">Posso modificar as recomendações?</h3>
                 <p className="text-muted-foreground">
-                  Ainda não, oferecemos três opções de configuração e você pode
-                  visualizar os detalhes de cada componente. Em breve,
-                  adicionaremos a funcionalidade de personalizar ainda mais sua
-                  configuração.
+                  Hoje você escolhe entre três builds prontas e pode ver os
+                  detalhes de cada peça. Ainda não dá para trocar peça por peça.
                 </p>
               </div>
-
-              {/* <div>
-                <h3 className="font-bold">
-                  Como compartilhar minha configuração?
-                </h3>
-                <p className="text-muted-foreground">
-                  Você pode compartilhar sua configuração através de um link ou
-                  exportá-la como PDF para referência futura ou para enviar a
-                  amigos.
-                </p>
-              </div> */}
             </div>
           </section>
         </div>
