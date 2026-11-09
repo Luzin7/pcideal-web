@@ -147,6 +147,11 @@ export default function BuilderPage() {
   };
 
   const handleNextStep = async () => {
+    if (step === 1) {
+      setStep(2);
+      return;
+    }
+
     if (step === 2) {
       const clampedBudget = clampBudget(budget);
       setBudget(clampedBudget);
@@ -156,9 +161,10 @@ export default function BuilderPage() {
         setLoading(false);
       }
       setBuildComplete(builds);
-    } else {
-      setStep(step + 1);
+      return;
     }
+
+    setStep(step + 1);
   };
 
   const handlePrevStep = () => {
