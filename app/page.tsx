@@ -32,8 +32,8 @@ export default function Home() {
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Diga para que vai usar e quanto pode gastar. Em 2 minutos você
-              recebe 3 opções que encaixam entre si, com preço na KaBuM. Sem
-              cadastro.
+              recebe 3 opções que encaixam entre si, com preço atualizado na
+              loja. Sem cadastro.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
               <Link href={builder} className="w-full sm:w-auto">
@@ -61,7 +61,8 @@ export default function Home() {
                 <Check className="h-4 w-4 mr-2 text-primary" /> Sem cadastro
               </span>
               <span className="flex items-center">
-                <Check className="h-4 w-4 mr-2 text-primary" /> Preços na KaBuM
+                <Check className="h-4 w-4 mr-2 text-primary" /> Preços
+                atualizados
               </span>
               <span className="flex items-center">
                 <Check className="h-4 w-4 mr-2 text-primary" /> Você decide a
@@ -154,7 +155,7 @@ export default function Home() {
                 Pronto para ver sua build?
               </h2>
               <p className="max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Em 2 minutos, com preços na KaBuM e sem cadastro.
+                Em 2 minutos, com preços atualizados e sem cadastro.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">

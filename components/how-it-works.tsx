@@ -70,7 +70,7 @@ export default function HowItWorks() {
           </div>
           <div className="flex flex-col items-center text-center space-y-2">
             <div className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight">
-              KaBuM
+              Preço atual
             </div>
             <p className="text-muted-foreground font-medium">
               preço no dia da consulta

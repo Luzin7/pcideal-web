@@ -49,7 +49,7 @@ export default function AboutPage() {
               Sem cadastro, sem pressão
             </h3>
             <p className="text-sm text-muted-foreground">
-              Você vê as peças, os preços e os links da KaBuM. A compra é sua.
+              Você vê as peças, os preços e os links da loja. A compra é sua.
             </p>
           </div>
         </div>
@@ -97,7 +97,7 @@ export default function AboutPage() {
             Pronto para montar seu PC sem errar?
           </h2>
           <p className="text-primary-foreground/90 text-lg">
-            Sem cadastro. Em 2 minutos você vê sua build com preços na KaBuM.
+            Sem cadastro. Em 2 minutos você vê sua build com preços atualizados.
           </p>
           <Link href="/builder" className="inline-block">
             <Button

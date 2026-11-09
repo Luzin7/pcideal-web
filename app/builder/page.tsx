@@ -719,7 +719,7 @@ export default function BuilderPage() {
                         </h3>
                         <p className="text-sm text-muted-foreground mb-4">
                           Confira os dados antes de comprar. Preços e links vêm
-                          da KaBuM e podem mudar na loja.
+                          da loja e podem mudar a qualquer momento.
                         </p>
                       </div>
                       <Card className="shadow-sm">
@@ -877,7 +877,7 @@ function ComponentItem({
             target="_blank"
             rel="noopener noreferrer"
           >
-            Comprar na KaBuM
+            Comprar na loja
           </a>
         </Button>
       </div>

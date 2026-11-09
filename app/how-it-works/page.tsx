@@ -67,7 +67,7 @@ export default function HowItWorksPage() {
                 <h3 className="text-2xl font-bold mb-4">Compare e escolha</h3>
                 <p className="text-muted-foreground text-lg leading-relaxed max-w-sm">
                   Três opções prontas: econômica, balanceada e performance. Cada
-                  peça vem com preço e link da KaBuM.
+                  peça vem com preço e link para a loja.
                 </p>
               </div>
             </div>
@@ -176,7 +176,7 @@ export default function HowItWorksPage() {
                   <Check className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-medium">Preço na KaBuM</h3>
+                  <h3 className="font-medium">Preço na loja</h3>
                   <p className="text-sm text-muted-foreground">
                     Mostramos o valor da loja no dia da consulta.
                   </p>
@@ -288,8 +288,8 @@ export default function HowItWorksPage() {
               <div>
                 <h3 className="font-bold">Como vocês ganham dinheiro?</h3>
                 <p className="text-muted-foreground">
-                  Recebemos uma comissão da KaBuM quando você compra por um link
-                  nosso. O preço que você paga é o mesmo da loja.
+                  Quando você compra por um dos nossos links, a loja paga uma
+                  comissão pra gente. O preço pra você é o mesmo.
                 </p>
               </div>
 

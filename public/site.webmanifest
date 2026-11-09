@@ -1,7 +1,7 @@
 {
   "name": "PcIdeal",
   "short_name": "PcIdeal",
-  "description": "Diga para que vai usar e quanto pode gastar. O PcIdeal mostra 3 builds com peças que encaixam e preços na KaBuM. Sem cadastro.",
+  "description": "Diga para que vai usar e quanto pode gastar. O PcIdeal mostra 3 builds com peças que encaixam e preços atualizados na loja. Sem cadastro.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
