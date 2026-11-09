@@ -176,8 +176,8 @@ export default function HowItWorksPage() {
                 <div>
                   <h3 className="font-medium">Preços atualizados</h3>
                   <p className="text-sm text-muted-foreground">
-                    Comparamos preços em tempo real nas principais lojas
-                    brasileiras para encontrar as melhores ofertas.
+                    Comparamos preços na KaBuM e atualizamos os valores ao longo
+                    do dia.
                   </p>
                 </div>
               </div>

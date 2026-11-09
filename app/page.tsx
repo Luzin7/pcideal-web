@@ -62,7 +62,8 @@ export default function Home() {
                 verificadas
               </span>
               <span className="flex items-center">
-                <Check className="h-4 w-4 mr-2 text-primary" /> Melhor preço
+                <Check className="h-4 w-4 mr-2 text-primary" /> Preços
+                atualizados
               </span>
               <span className="flex items-center">
                 <Check className="h-4 w-4 mr-2 text-primary" /> Zero gargalo
