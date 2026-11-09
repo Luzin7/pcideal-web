@@ -21,7 +21,7 @@ Esse projeto foi configurado utilizando [Confectus](https://www.npmjs.com/packag
 ## Pré-requisitos
 
 - Node.js v22.11 ou superior
-- bun ou npm
+- npm
 
 ## Configuração do Projeto
 
@@ -35,9 +35,7 @@ cd pcideal-web
 2. **Instale as dependências:**
 
 ```bash
-bun i
-# ou
-npm i
+npm install
 ```
 
 3. **Configure as variáveis de ambiente:**
@@ -49,19 +47,14 @@ npm i
 - **Modo desenvolvimento:**
 
   ```bash
-  bun run dev
-  # ou
   npm run dev
   ```
 
 - **Modo produção:**
 
   ```bash
-  bun run build
-  bun run start
-  # ou
   npm run build
-  npm start
+  npm run start
   ```
 
 A aplicação estará disponível em `http://localhost:3000` (ou na porta que você substituiu no seu `.env`).
