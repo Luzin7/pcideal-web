@@ -37,26 +37,16 @@ export default function Header() {
             <Link
               href={builder}
               className={`text-sm font-medium transition-colors hover:text-primary ${
-                isActive('/montar') ? 'text-primary' : 'text-foreground/60'
+                isActive(builder) ? 'text-primary' : 'text-foreground/60'
               }`}
               aria-label="Montar PC"
             >
               Montar PC
             </Link>
-            {/* <Link
-              href="/componentes"
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                isActive('/componentes') ? 'text-primary' : 'text-foreground/60'
-              }`}
-            >
-              Componentes
-            </Link> */}
             <Link
               href={howItWorks}
               className={`text-sm font-medium transition-colors hover:text-primary ${
-                isActive('/como-funciona')
-                  ? 'text-primary'
-                  : 'text-foreground/60'
+                isActive(howItWorks) ? 'text-primary' : 'text-foreground/60'
               }`}
               aria-label="Como funciona o PcIdeal"
             >
@@ -75,18 +65,6 @@ export default function Header() {
         </div>
         <div className="flex items-center gap-4">
           <ThemeToggle />
-          {/* <div className="hidden md:flex items-center gap-4">
-            <Link href="/login">
-              <Button variant="outline" size="sm">
-                Entrar
-              </Button>
-            </Link>
-            <Link href="/cadastro">
-              <Button size="sm" className="bg-primary hover:bg-primary/90">
-                Cadastrar
-              </Button>
-            </Link>
-          </div> */}
           <button
             className="md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -101,7 +79,6 @@ export default function Header() {
           </button>
         </div>
       </div>
-      {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="md:hidden">
           <div className="container py-4 space-y-4">
@@ -118,34 +95,26 @@ export default function Header() {
               <Link
                 href={localRoutePaths.builder}
                 className={`text-sm font-medium transition-colors hover:text-primary ${
-                  isActive('/montar') ? 'text-primary' : 'text-foreground/60'
-                }`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Montar PC
-              </Link>
-              {/* <Link
-                href="/componentes"
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  isActive('/componentes')
+                  isActive(localRoutePaths.builder)
                     ? 'text-primary'
                     : 'text-foreground/60'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Componentes
-              </Link> */}
+                Montar PC
+              </Link>
               <Link
                 href={localRoutePaths.howItWorks}
                 className={`text-sm font-medium transition-colors hover:text-primary ${
-                  isActive('/como-funciona')
+                  isActive(localRoutePaths.howItWorks)
                     ? 'text-primary'
                     : 'text-foreground/60'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Como Funciona
-              </Link>              <Link
+              </Link>
+              <Link
                 href="/about"
                 className={`text-sm font-medium transition-colors hover:text-primary ${
                   isActive('/about') ? 'text-primary' : 'text-foreground/60'
@@ -153,19 +122,8 @@ export default function Header() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Sobre
-              </Link>            </nav>
-            {/* <div className="flex flex-col space-y-2">
-              <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-                <Button variant="outline" className="w-full">
-                  Entrar
-                </Button>
               </Link>
-              <Link href="/cadastro" onClick={() => setMobileMenuOpen(false)}>
-                <Button className="w-full bg-primary hover:bg-primary/90">
-                  Cadastrar
-                </Button>
-              </Link>
-            </div> */}
+            </nav>
           </div>
         </div>
       )}

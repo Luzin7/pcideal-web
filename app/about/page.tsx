@@ -100,7 +100,7 @@ export default function AboutPage() {
           <h2 className="text-3xl md:text-4xl font-bold">
             Pronto para montar sua máquina?
           </h2>
-          <p className="text-primary-foreground/80 text-lg">
+          <p className="text-primary-foreground/90 text-lg">
             Junte-se ao clube de usuários que economizaram tempo e dinheiro com
             o PcIdeal.
           </p>

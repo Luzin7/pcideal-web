@@ -19,6 +19,9 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? 'https://pcideal.com.br',
+  ),
   title: {
     default: 'PcIdeal - Monte seu PC Perfeito',
     template: '%s | PcIdeal',

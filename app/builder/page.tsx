@@ -83,6 +83,31 @@ const typeMapper = {
   performance: 'Performance',
 };
 
+const minBudget = 2500;
+const maxBudget = 15000;
+
+const clampBudget = (value: number) => {
+  if (!Number.isFinite(value)) {
+    return minBudget;
+  }
+  return Math.min(maxBudget, Math.max(minBudget, Math.round(value)));
+};
+
+const formatPartFreshness = (updatedAt: string) => {
+  const timestamp = new Date(updatedAt).getTime();
+  if (Number.isNaN(timestamp)) {
+    return null;
+  }
+  const hours = Math.floor((Date.now() - timestamp) / 3_600_000);
+  if (hours < 0) {
+    return null;
+  }
+  if (hours < 1) {
+    return 'atualizado há menos de 1h';
+  }
+  return `atualizado há ${hours}h`;
+};
+
 export default function BuilderPage() {
   const [step, setStep] = useState(1);
   const [budget, setBudget] = useState(5000);
@@ -97,10 +122,12 @@ export default function BuilderPage() {
   const [buildComplete, setBuildComplete] = useState<BuildCompleteType>(null);
   const [buildNotFound, setBuildNotFound] = useState<boolean>(false);
 
-  const handleBuild = async (): Promise<RecommendationBuild[] | null> => {
+  const handleBuild = async (
+    budgetValue: number,
+  ): Promise<RecommendationBuild[] | null> => {
     setLoading(true);
     const result = await createBuild({
-      budget,
+      budget: budgetValue,
       cpuPreference,
       gpuPreference,
       usageType,
@@ -121,8 +148,10 @@ export default function BuilderPage() {
 
   const handleNextStep = async () => {
     if (step === 2) {
+      const clampedBudget = clampBudget(budget);
+      setBudget(clampedBudget);
       setStep(3);
-      const builds = await handleBuild();
+      const builds = await handleBuild(clampedBudget);
       if (!builds) {
         setLoading(false);
       }
@@ -144,10 +173,8 @@ export default function BuilderPage() {
       <div className="container py-12 relative z-10 max-w-4xl">
         <div className="mb-12">
           <div className="flex justify-between items-center relative">
-            {/* Progress Line Background */}
             <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-muted -z-10 -translate-y-1/2" />
 
-            {/* Step 1 */}
             <div className="flex flex-col items-center bg-background px-2">
               <div
                 className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 ${
@@ -165,7 +192,6 @@ export default function BuilderPage() {
               </span>
             </div>
 
-            {/* Step 2 */}
             <div className="flex flex-col items-center bg-background px-2">
               <div
                 className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 ${
@@ -183,7 +209,6 @@ export default function BuilderPage() {
               </span>
             </div>
 
-            {/* Step 3 */}
             <div className="flex flex-col items-center bg-background px-2">
               <div
                 className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 ${
@@ -399,10 +424,10 @@ export default function BuilderPage() {
                         <div className="flex-1">
                           <Slider
                             id="budget"
-                            min={2500}
-                            max={15000}
+                            min={minBudget}
+                            max={maxBudget}
                             step={100}
-                            value={[budget]}
+                            value={[clampBudget(budget)]}
                             onValueChange={(value) => setBudget(value[0])}
                             className="py-4"
                           />
@@ -418,6 +443,7 @@ export default function BuilderPage() {
                               onChange={(e) =>
                                 setBudget(Number(e.target.value))
                               }
+                              onBlur={() => setBudget(clampBudget(budget))}
                               className="pl-9 font-bold text-lg"
                             />
                           </div>
@@ -425,7 +451,7 @@ export default function BuilderPage() {
                       </div>
 
                       <div className="flex justify-between text-sm text-muted-foreground">
-                        <span>R$ 2.000</span>
+                        <span>R$ 2.500</span>
                         <span>R$ 15.000</span>
                       </div>
                     </div>
@@ -475,7 +501,7 @@ export default function BuilderPage() {
                   <Card className="shadow-sm bg-background">
                     <CardContent className="flex flex-col items-center justify-center py-12">
                       <div className="mb-4">
-                        <X className="h-16 w-16 text-background-foreground" />
+                        <X className="h-16 w-16 text-muted-foreground" />
                       </div>
                       <h3 className="text-2xl font-bold mb-2 text-primary">
                         Não encontramos uma build ideal
@@ -525,7 +551,7 @@ export default function BuilderPage() {
                           >
                             {isBalanced && (
                               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full shadow-sm z-10">
-                                RECOMENDADO
+                                Recomendado
                               </div>
                             )}
                             <CardHeader>
@@ -653,7 +679,6 @@ export default function BuilderPage() {
                               <TabsTrigger value="components">
                                 Componentes
                               </TabsTrigger>
-                              {/* <TabsTrigger value="prices">Preços</TabsTrigger> */}
                             </TabsList>
                             <TabsContent
                               value="components"
@@ -679,51 +704,6 @@ export default function BuilderPage() {
                                   ))}
                               </div>
                             </TabsContent>
-                            {/* <TabsContent value="prices" className="pt-4">
-                              <div className="space-y-4">
-                                <div className="rounded-lg border p-4">
-                                  <h3 className="font-medium mb-2">
-                                    Comparação de Preços
-                                  </h3>
-                                  <div className="space-y-3">
-                                    <PriceItem
-                                      store="KaBuM!"
-                                      price={
-                                        buildComplete[selectedBuild].build_value
-                                      }
-                                      bestPrice={true}
-                                    />
-                                  </div>
-                                </div>
-                                <div className="rounded-lg border p-4 bg-muted/20">
-                                  <h3 className="font-medium mb-2">Economia</h3>
-                                  <p className="text-sm text-muted-foreground">
-                                    Esta configuração está{' '}
-                                    <span className="text-green-500 font-medium">
-                                      {convertSmallestUnitToCurrency(
-                                        buildComplete[selectedBuild]
-                                          .build_value,
-                                      ) < budget
-                                        ? `R$ ${(
-                                            budget -
-                                            convertSmallestUnitToCurrency(
-                                              buildComplete[selectedBuild]
-                                                .build_value,
-                                            )
-                                          ).toLocaleString('pt-BR')} abaixo`
-                                        : `R$ ${(
-                                            convertSmallestUnitToCurrency(
-                                              buildComplete[selectedBuild]
-                                                .build_value,
-                                            ) - budget
-                                          ).toLocaleString('pt-BR')} acima`}
-                                    </span>{' '}
-                                    do seu orçamento de R${' '}
-                                    {budget.toLocaleString('pt-BR')}.
-                                  </p>
-                                </div>
-                              </div>
-                            </TabsContent> */}
                           </Tabs>
                         </CardContent>
                         <CardFooter className="flex justify-between">
@@ -731,20 +711,6 @@ export default function BuilderPage() {
                             <ArrowLeft className="mr-2 h-4 w-4" />
                             Ajustar Orçamento
                           </Button>
-                          {/* <div className="flex space-x-2">
-                            <Button variant="outline">
-                              <Share2 className="mr-2 h-4 w-4" />
-                              Compartilhar
-                            </Button>
-                            <Button variant="outline">
-                              <Download className="mr-2 h-4 w-4" />
-                              Exportar PDF
-                            </Button>
-                            <Button className="bg-primary hover:bg-primary/90">
-                              <ShoppingCart className="mr-2 h-4 w-4" />
-                              Comprar Componentes
-                            </Button>
-                          </div> */}
                         </CardFooter>
                       </Card>
                     </div>
@@ -873,32 +839,6 @@ export default function BuilderPage() {
                               </div>
                             </div>
                           </div>
-                          {/* <Separator /> */}
-                          {/* <div>
-                            <h3 className="font-medium mb-2">Avaliação</h3>
-                            <div className="space-y-2">
-                              <div className="flex justify-between text-sm">
-                                <span>Desempenho</span>
-                                <span className="font-medium text-green-500">
-                                  {selectedBuild === 0
-                                    ? 'Bom'
-                                    : selectedBuild === 1
-                                      ? 'Ótimo'
-                                      : 'Excelente'}
-                                </span>
-                              </div>
-                              <div className="flex justify-between text-sm">
-                                <span>Custo-benefício</span>
-                                <span className="font-medium text-green-500">
-                                  {selectedBuild === 0
-                                    ? 'Excelente'
-                                    : selectedBuild === 1
-                                      ? 'Ótimo'
-                                      : 'Bom'}
-                                </span>
-                              </div>
-                            </div>
-                          </div> */}
                           <Separator />
                         </CardContent>
                         <CardFooter>
@@ -928,27 +868,19 @@ function ComponentItem({
   label: string;
   part: Part;
 }) {
+  const freshness = part.updated_at
+    ? formatPartFreshness(part.updated_at)
+    : null;
   return (
     <div className="flex items-center space-x-4 rounded-lg border p-3 transition-all hover:border-primary hover:bg-primary/5">
       <div className="rounded-full p-2 bg-primary/10 text-primary">{icon}</div>
       <div className="flex-1">
         <div className="flex justify-between">
           <p className="font-medium">{label}</p>
-          {/* <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                <Info className="h-4 w-4 text-muted-foreground" />
-              </TooltipTrigger>
-              <TooltipContent>
-                <p className="text-xs max-w-[200px]">{explanation}</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider> */}
         </div>
         <p className="text-sm">
           {part.brand.toUpperCase()} {part.model}
         </p>
-        {/* <p className="text-xs text-muted-foreground">asdad</p> */}
       </div>
       <div className="text-right">
         <p className="font-medium">
@@ -957,49 +889,19 @@ function ComponentItem({
             'pt-BR',
           )}
         </p>
-        <a
-          href={part.affiliate_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs text-primary hover:underline"
-        >
-          Comprar na Kabum
-        </a>
+        {freshness && (
+          <p className="text-xs text-muted-foreground">{freshness}</p>
+        )}
+        <Button asChild variant="outline" size="sm" className="mt-2">
+          <a
+            href={part.affiliate_url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Comprar na KaBuM
+          </a>
+        </Button>
       </div>
     </div>
   );
 }
-
-// function PriceItem({
-//   store,
-//   price,
-//   bestPrice = false,
-// }: {
-//   store: string;
-//   price: number;
-//   bestPrice: boolean;
-// }) {
-//   return (
-//     <div
-//       className={`flex justify-between items-center p-2 rounded ${bestPrice ? 'bg-primary/10' : ''}`}
-//     >
-//       <div className="flex items-center">
-//         {bestPrice && <Check className="h-4 w-4 text-primary mr-2" />}
-//         <span>{store}</span>
-//       </div>
-//       <div className="flex items-center">
-//         <span className={`font-medium ${bestPrice ? 'text-primary' : ''}`}>
-//           R$ {price.toLocaleString('pt-BR')}
-//         </span>
-//         {bestPrice && (
-//           <Badge
-//             variant="outline"
-//             className="ml-2 text-xs border-primary text-primary"
-//           >
-//             Melhor preço
-//           </Badge>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
