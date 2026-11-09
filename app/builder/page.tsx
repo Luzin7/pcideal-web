@@ -30,7 +30,6 @@ import { Separator } from '@/components/ui/separator';
 import { Slider } from '@/components/ui/slider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { convertSmallestUnitToCurrency } from '@/lib/utils';
-import { trackEvent } from '@/lib/analytics';
 import {
   BuildParts,
   Part,
@@ -143,17 +142,12 @@ export default function BuilderPage() {
 
     setBuildNotFound(false);
     setLoading(false);
-    trackEvent({
-      name: 'build_generated',
-      properties: { budget: budgetValue },
-    });
 
     return result.data.data.builds;
   };
 
   const handleNextStep = async () => {
     if (step === 1) {
-      trackEvent({ name: 'builder_started' });
       setStep(2);
       return;
     }
@@ -162,10 +156,6 @@ export default function BuilderPage() {
       const clampedBudget = clampBudget(budget);
       setBudget(clampedBudget);
       setStep(3);
-      trackEvent({
-        name: 'build_requested',
-        properties: { budget: clampedBudget },
-      });
       const builds = await handleBuild(clampedBudget);
       if (!builds) {
         setLoading(false);
@@ -706,9 +696,6 @@ export default function BuilderPage() {
                                       label={
                                         partLabels[key as keyof BuildParts]
                                       }
-                                      buildType={
-                                        buildComplete[selectedBuild].build_type
-                                      }
                                       part={part!}
                                     />
                                   ))}
@@ -863,12 +850,10 @@ export default function BuilderPage() {
 function ComponentItem({
   icon,
   label,
-  buildType,
   part,
 }: {
   icon: React.ReactNode;
   label: string;
-  buildType: string;
   part: Part;
 }) {
   const freshness = part.updated_at
@@ -900,15 +885,6 @@ function ComponentItem({
             href={part.affiliate_url}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() =>
-              trackEvent({
-                name: 'affiliate_clicked',
-                properties: {
-                  build_type: buildType.toLowerCase(),
-                  part: label,
-                },
-              })
-            }
           >
             Comprar na KaBuM
           </a>
