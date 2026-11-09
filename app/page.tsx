@@ -23,16 +23,16 @@ export default function Home() {
         <div className="container px-4 md:px-6 relative z-10">
           <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
             <div className="inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium text-primary bg-primary/10 backdrop-blur-sm">
-              <Check className="mr-1 h-3 w-3" /> 100% Compatível
+              <Check className="mr-1 h-3 w-3" /> Feito para o seu primeiro PC
             </div>
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-foreground">
-              Seu PC Ideal, <br />
-              <span className="text-primary">sem dor de cabeça.</span>
+              Seu primeiro PC, <br />
+              <span className="text-primary">sem medo de errar na peça.</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Nossa engine analisa milhares de combinações de hardware para
-              garantir que cada centavo do seu orçamento vire performance bruta.
-              Sem planilhas, sem dúvidas.
+              Diga para que vai usar e quanto pode gastar. Em 2 minutos você
+              recebe 3 opções que encaixam entre si, com preço na KaBuM. Sem
+              cadastro.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
               <Link href={builder} className="w-full sm:w-auto">
@@ -40,7 +40,7 @@ export default function Home() {
                   size="lg"
                   className="w-full sm:w-auto text-lg h-14 px-8 font-bold shadow-xl shadow-primary/20 hover:shadow-primary/30 transition-all"
                 >
-                  Montar meu PC Agora
+                  Montar meu PC agora
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
@@ -55,18 +55,16 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Trust Signals */}
             <div className="pt-8 flex flex-wrap justify-center gap-8 text-sm font-medium text-muted-foreground">
               <span className="flex items-center">
-                <Check className="h-4 w-4 mr-2 text-primary" /> Peças
-                verificadas
+                <Check className="h-4 w-4 mr-2 text-primary" /> Sem cadastro
               </span>
               <span className="flex items-center">
-                <Check className="h-4 w-4 mr-2 text-primary" /> Preços
-                atualizados
+                <Check className="h-4 w-4 mr-2 text-primary" /> Preços na KaBuM
               </span>
               <span className="flex items-center">
-                <Check className="h-4 w-4 mr-2 text-primary" /> Zero gargalo
+                <Check className="h-4 w-4 mr-2 text-primary" /> Você decide a
+                compra
               </span>
             </div>
           </div>
@@ -86,12 +84,12 @@ export default function Home() {
                 Por que usar o PcIdeal?
               </div>
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight lg:text-5xl">
-                Tecnologia de ponta, <br />
-                <span className="text-primary">simplificada para você.</span>
+                Sem letra miúda. <br />
+                <span className="text-primary">Sem peça errada.</span>
               </h2>
               <p className="max-w-[800px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mx-auto">
-                Esqueça fóruns confusos e planilhas intermináveis. Nossa
-                plataforma faz o trabalho pesado de compatibilidade e preços.
+                Antes de sugerir, a gente confere se as peças encaixam e se
+                cabem no seu orçamento.
               </p>
             </div>
           </div>
@@ -99,36 +97,35 @@ export default function Home() {
             <div className="md:col-span-2 h-full">
               <FeatureCard
                 icon={<Cpu className="h-10 w-10 text-primary" />}
-                title="Compatibilidade Garantida"
-                description="Nosso algoritmo cruza dados de socket, chipset e dimensões físicas. Se a gente sugeriu, encaixa."
+                title="Nada de peça que não encaixa"
+                description="Conferimos processador, placa-mãe, memória, fonte e gabinete antes de sugerir. O que está na lista funciona junto."
               />
             </div>
             <div className="md:col-span-1 h-full">
               <FeatureCard
                 icon={<DollarSign className="h-10 w-10 text-primary" />}
-                title="Otimização de Orçamento"
-                description="Não desperdice dinheiro. Focamos no melhor custo-benefício real."
+                title="Dentro do que você pode gastar"
+                description="Você define o teto. A build é montada para caber nele, sem peça cara que não muda o seu dia."
               />
             </div>
             <div className="md:col-span-1 h-full">
               <FeatureCard
                 icon={<MonitorPlay className="h-10 w-10 text-primary" />}
-                title="Perfis de Uso Reais"
-                description="Ajustamos a prioridade de CPU/GPU automaticamente para seu uso."
+                title="Ajustado para o seu uso"
+                description="Jogos, trabalho ou edição: as peças mudam de prioridade conforme o que você faz."
               />
             </div>
             <div className="md:col-span-2 h-full">
               <FeatureCard
                 icon={<Zap className="h-10 w-10 text-primary" />}
-                title="Performance Máxima"
-                description="Calculamos gargalos para garantir que sua GPU não seja limitada pelo processador."
+                title="O melhor desempenho por real"
+                description="O dinheiro vai para o que faz diferença no seu uso, não para número grande na caixa."
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* How It Works Section */}
       <section id="how-it-works" className="w-full py-12 md:py-24 lg:py-32">
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
@@ -137,28 +134,26 @@ export default function Home() {
                 Como Funciona
               </div>
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                Monte seu PC em 3 Passos Simples
+                Monte seu PC em 3 passos
               </h2>
               <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Nosso processo é simples e rápido, projetado para qualquer
-                pessoa usar.
+                Sem cadastro e sem termo técnico. Você informa o uso e o
+                orçamento; a gente monta as opções.
               </p>
             </div>
           </div>
           <HowItWorks />
         </div>
       </section>
-      {/* CTA Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-primary text-primary-foreground">
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                Pronto para montar o PC dos seus sonhos?
+                Pronto para ver sua build?
               </h2>
               <p className="max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Comece agora e tenha o computador ideal para suas necessidades
-                em minutos.
+                Em 2 minutos, com preços na KaBuM e sem cadastro.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">

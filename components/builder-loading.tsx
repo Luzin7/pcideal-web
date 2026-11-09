@@ -9,16 +9,15 @@ export function BuilderLoadingSkeleton() {
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary"></div>
           <div className="absolute inset-0 rounded-full h-16 w-16 border-t-2 border-primary/20"></div>
         </div>
-        <h3 className="text-xl font-medium mb-2">Montando seu PC ideal...</h3>
+        <h3 className="text-xl font-medium mb-2">Montando sua build...</h3>
         <p className="text-muted-foreground text-center max-w-md">
-          Estamos analisando milhares de combinações para encontrar a melhor
-          configuração para você.
+          Estamos escolhendo peças que encaixam e cabem no seu orçamento.
         </p>
         <div className="w-full max-w-md mt-6 mt-auto space-y-2">
           <div className="flex items-center gap-2">
             <div className="h-2 w-2 bg-primary rounded-full animate-pulse" />
             <span className="text-sm text-muted-foreground">
-              Verificando compatibilidade...
+              Conferindo se as peças encaixam...
             </span>
           </div>
           <div className="flex items-center gap-2">
@@ -27,7 +26,7 @@ export function BuilderLoadingSkeleton() {
               style={{ animationDelay: '0.3s' }}
             />
             <span className="text-sm text-muted-foreground">
-              Otimizando custo-benefício...
+              Ajustando ao seu orçamento...
             </span>
           </div>
           <div className="flex items-center gap-2">
@@ -36,7 +35,7 @@ export function BuilderLoadingSkeleton() {
               style={{ animationDelay: '0.6s' }}
             />
             <span className="text-sm text-muted-foreground">
-              Buscando melhores preços...
+              Conferindo preços na KaBuM...
             </span>
           </div>
         </div>
